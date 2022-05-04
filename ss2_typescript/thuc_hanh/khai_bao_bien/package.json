@@ -1,0 +1,7 @@
+{
+  "name": "khai_bao_bien",
+  "version": "1.0.0",
+  "dependencies": {
+    "typescript": "^4.1.5"
+  }
+}
