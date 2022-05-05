@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <h1 class="text-primary">Color Picker</h1>
+      <div class="form-group">
+        <label>Choose Color : </label>
+        <select class="form-control" aria-label="Default select example" [(ngModel)]="changeColor">
+          <option value="red">red</option>
+          <option value="green">green</option>
+          <option value="blue">blue</option>
+        </select>
+      </div>
+      <p [class]="changeColor" style="font-size: 30px;font-weight: bold">My Color</p>
+      <div [style.background-color]="changeColor" style="width: 200px;height: 100px"></div>
+    </div>
+  </div>
+</div>
+
+
