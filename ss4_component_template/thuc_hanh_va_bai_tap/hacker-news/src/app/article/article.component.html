@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <h2 class="text-primary">Today Article</h2>
+    <hr>
+    <div *ngFor="let art of articles">
+      <a class="text-decoration-none text-danger" href="{{art.url}}" target="_blank">{{art.title}}</a> : <app-likes></app-likes>
+    </div>
+    <hr>
+    <div>
+      <h2 class="text-primary">Article Information</h2>
+      <table>
+        <tr>
+          <td>Title:</td>
+          <td><textarea [(ngModel)]="article.title" cols="70"></textarea></td>
+        </tr>
+        <tr>
+          <td>Url:</td>
+          <td>
+            <textarea [(ngModel)]="article.url" cols="70"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button class="btn btn-info text-white" (click)="addNewArticle()">Add</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
