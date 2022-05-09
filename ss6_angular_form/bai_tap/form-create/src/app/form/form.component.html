@@ -1,0 +1,90 @@
+<h2 class="text-center">Create new Person</h2>
+<form [formGroup]="content" novalidate class="d-flex justify-content-center">
+  <table border="1px" class="table-striped">
+    <tr>
+      <td>Email</td>
+      <td><input type="text" formControlName="email">
+        <p class="form-check text-danger" *ngIf="!email.valid && (email.dirty || email.touched)"
+           [hidden]="!email.errors?.required">
+          required
+        </p>
+        <p class="form-check text-danger" *ngIf="!email.valid && (email.dirty || email.touched)"
+           [hidden]="!email.errors?.email">
+          invalid email
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><input type="text" formControlName="password" (change)="check()">
+        <div class="form-check" *ngIf="!password?.valid && (password?.touched || password?.dirty)">
+          <p class="form-check text-danger"
+             [hidden]="!password.errors?.required">Required</p>
+          <p class="form-check text-warning"
+             [hidden]="!password.errors?.requiredValue"> Min length is 6</p>
+        </div>
+      </td>
+    </tr>
+        <tr>
+          <td>Confirm Password</td>
+          <td>
+            <input type="text" formControlName="confirmPassword" (change)="check()">
+            <div class="form-check" *ngIf="!confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched)">
+                <p class="text-danger form-check" *ngIf="confirmPassword.errors?.required">Required</p>
+                <p class="text-warning form-check" *ngIf="confirmPassword.errors?.requiredValue">Min Length is 6</p>
+                <p class="text-danger form-check" *ngIf="confirmPassword.errors?.notMatch">Not Match With Password</p>
+            </div>
+          </td>
+        </tr>
+    <tr>
+      <td>Country</td>
+      <td>
+        <select formControlName="country" class="form-select" aria-label="Default select example">
+          <option *ngFor="let counrtyStr of countryArr" value="{{counrtyStr}}">{{counrtyStr}}</option>
+        </select>
+        <div class="form-check" *ngIf="!country.valid && (country.touched || country.dirty)">
+          <p *ngIf="country.errors?.required" class="form-check text-danger"></p>
+        </div>
+
+      </td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>
+        <input type="text" formControlName="age">
+        <div class="form-check" *ngIf="!age.valid && (age?.touched || age?.dirty)">
+          <p class="text-danger" *ngIf="age.errors?.required">Required</p>
+          <p class="text-danger" *ngIf="age.errors?.isNumber">Must be number</p>
+          <p class="text-danger" *ngIf="age.errors?.age18">18 Years Old Only</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>
+        <div>
+          <label>Female <input type="radio" formControlName="gender" value="0"></label>
+          <label class="ms-5">Male <input type="radio" formControlName="gender" value="1"></label>
+        </div>
+        <div class="form-check" *ngIf="!gender.valid && (gender.touched || gender.dirty)">
+          <p class="form-check text-danger" *ngIf="gender.errors?.required">Required</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td>
+        <input type="text" formControlName="phone">
+        <div class="form-check" *ngIf="!phone.valid && (phone.touched || phone.dirty)">
+          <p *ngIf="phone.errors?.required" class="text-danger">Required</p>
+          <p *ngIf="phone.errors?.pattern" class="text-danger">Invalid Phone number (+84123456789)</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input [disabled]="!content.valid" class="btn btn-primary" type="submit" value="Create" (click)="submit()">
+      </td>
+    </tr>
+  </table>
+</form>
