@@ -1,0 +1,21 @@
+<h2>Edit Student</h2>
+<form>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>
+        <input type="text" [(ngModel)]="student.name">
+      </td>
+    </tr>
+    <tr>
+      <td>Class:</td>
+      <td><input type="text" [(ngModel)]="student.studyClass"></td>
+    </tr>
+    <tr>
+      <td><a style="text-decoration:none " [routerLink]="['/']">Back To List Student</a></td>
+      <td>
+        <button (click)="editStudent()">Edit</button>
+      </td>
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,18 @@
+<h2>Delete Student</h2>
+<table border="1px solid black">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Class</th>
+    </tr>
+    <tr>
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.studyClass}}</td>
+    </tr>
+  <tr>
+    <td></td>
+    <td><a [routerLink]="['/']">Back to list Student</a></td>
+    <td colspan="3"><button (click)="deleteStudent()">Delete</button></td>
+  </tr>
+</table>

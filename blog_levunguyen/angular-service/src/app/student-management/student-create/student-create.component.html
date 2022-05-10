@@ -1,0 +1,22 @@
+<h2>Create Student</h2>
+<form [formGroup]="studentForm">
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>
+        <input type="text" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td>Class:</td>
+      <td><input type="text" formControlName="studyClass"></td>
+    </tr>
+    <tr>
+      <td><a style="text-decoration:none " [routerLink]="['/']">Back To List Student</a></td>
+      <td>
+        <button (click)="createStudent()">Create</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
