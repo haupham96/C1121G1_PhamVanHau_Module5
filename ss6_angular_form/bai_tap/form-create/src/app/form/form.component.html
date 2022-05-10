@@ -16,7 +16,7 @@
     </tr>
     <tr>
       <td>Password</td>
-      <td><input type="text" formControlName="password" (change)="check()">
+      <td><input type="password" formControlName="password" (change)="check()">
         <div class="form-check" *ngIf="!password?.valid && (password?.touched || password?.dirty)">
           <p class="form-check text-danger"
              [hidden]="!password.errors?.required">Required</p>
@@ -28,7 +28,7 @@
         <tr>
           <td>Confirm Password</td>
           <td>
-            <input type="text" formControlName="confirmPassword" (change)="check()">
+            <input type="password" formControlName="confirmPassword" (change)="check()">
             <div class="form-check" *ngIf="!confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched)">
                 <p class="text-danger form-check" *ngIf="confirmPassword.errors?.required">Required</p>
                 <p class="text-warning form-check" *ngIf="confirmPassword.errors?.requiredValue">Min Length is 6</p>
