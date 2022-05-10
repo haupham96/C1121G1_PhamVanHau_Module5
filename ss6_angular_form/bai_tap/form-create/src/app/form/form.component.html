@@ -21,7 +21,7 @@
           <p class="form-check text-danger"
              [hidden]="!password.errors?.required">Required</p>
           <p class="form-check text-warning"
-             [hidden]="!password.errors?.requiredValue"> Min length is 6</p>
+             [hidden]="!password.errors?.min6"> {{password.errors?.min6}}</p>
         </div>
       </td>
     </tr>
@@ -31,8 +31,8 @@
             <input type="password" formControlName="confirmPassword" (change)="check()">
             <div class="form-check" *ngIf="!confirmPassword.valid && (confirmPassword.dirty || confirmPassword.touched)">
                 <p class="text-danger form-check" *ngIf="confirmPassword.errors?.required">Required</p>
-                <p class="text-warning form-check" *ngIf="confirmPassword.errors?.requiredValue">Min Length is 6</p>
-                <p class="text-danger form-check" *ngIf="confirmPassword.errors?.notMatch">Not Match With Password</p>
+                <p class="text-warning form-check" *ngIf="confirmPassword.errors?.min6">{{confirmPassword.errors?.min6}}</p>
+                <p class="text-danger form-check" *ngIf="confirmPassword.errors?.notMatch">{{confirmPassword.errors?.notMatch}}</p>
             </div>
           </td>
         </tr>
@@ -54,8 +54,8 @@
         <input type="text" formControlName="age">
         <div class="form-check" *ngIf="!age.valid && (age?.touched || age?.dirty)">
           <p class="text-danger" *ngIf="age.errors?.required">Required</p>
-          <p class="text-danger" *ngIf="age.errors?.isNumber">Must be number</p>
-          <p class="text-danger" *ngIf="age.errors?.age18">18 Years Old Only</p>
+          <p class="text-danger" *ngIf="age.errors?.isNumber">{{age.errors?.isNumber}}</p>
+          <p class="text-danger" *ngIf="age.errors?.age18">{{age.errors?.age18}}</p>
         </div>
       </td>
     </tr>

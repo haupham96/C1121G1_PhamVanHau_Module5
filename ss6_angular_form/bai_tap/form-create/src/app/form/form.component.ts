@@ -65,7 +65,7 @@ export class FormComponent implements OnInit {
 
   check() {
     if (this.content.get('password').value !== this.content.get('confirmPassword').value) {
-        this.content.get('confirmPassword').setErrors({'notMatch':true});
+        this.content.get('confirmPassword').setErrors({notMatch:'Not Match With Passowrd !'});
     }
   }
 }
