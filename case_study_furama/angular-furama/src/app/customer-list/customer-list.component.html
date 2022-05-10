@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1 class="text-primary">List Customer</h1>
+  </div>
+  <div>
+    <div style="display: flex; justify-content: flex-start; flex-direction: column">
+      <form action="/customer">
+        <input type="text" name="keyword" placeholder="input name">
+        <input class="btn btn-danger" type="submit" value="Search">
+      </form>
+      <a class="btn btn-info col-2 text-light mt-1" href="/customer/create">Create New Customer</a>
+    </div>
+
+    <br>
+  </div>
+
+  <br>
+  <div class="row">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link text-dark">1</a></li>
+      <li class="page-item"><a class="page-link text-dark">2</a></li>
+      <li class="page-item">
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead class="table-dark">
+      <tr>
+        <th>No.</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+        <th>ID</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Type</th>
+        <th class="text-center" colspan="2">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>C0001</td>
+        <td>Hau</td>
+        <td>15/05/1996</td>
+        <td>MALE</td>
+        <td>123456789</td>
+        <td>12345667</td>
+        <td>hau123@gmail.com</td>
+        <td>166NX</td>
+        <td>Diamond</td>
+        <td>
+          <a class="btn btn-primary text-white">Edit</a></td>
+        <td>
+          <button type="button" class="launchDeleteModal btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+            Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
