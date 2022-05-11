@@ -21,10 +21,9 @@ export class StudentService {
   }
 
   public editStudent(student: IStudent) {
-
-    for (let s of this.students) {
-      if (s.id == student.id) {
-        s = student;
+    for (let i = 0; i < this.students.length; i++) {
+      if (this.students[i].id == student.id) {
+        this.students[i] = student;
         break;
       }
     }
@@ -52,7 +51,7 @@ export class StudentService {
     for (let stu of this.students) {
       id = stu.id;
     }
-    return id+1;
+    return id + 1;
   }
 
 }

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <!-- Card -->
+      <mdb-card>
+        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img
+            src="https://play-lh.googleusercontent.com/Cu0--f70XV3OPaz1s7B8IIQ4jFN4ukydKrJtrhxMuFFF1RKLDizzehjyKmCv_o2GojM"
+            alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4 class="cyan-text">Translate to Vietnamese</h4>
+          </mdb-card-title>
+
+          <!--Text-->
+          <mdb-card-text class="primary-text"> Word : {{dictionary.eng}}</mdb-card-text>
+          <mdb-card-text class="deep-orange-text"> Meaning : {{dictionary.viet | uppercase}}</mdb-card-text>
+
+          <a mdbBtn color="cyan" rounded="true" [routerLink]="['/']" mdbWavesEffect>Home</a>
+        </mdb-card-body>
+      </mdb-card>
+      <!-- Card -->
+    </div>
+  </div>
+</div>

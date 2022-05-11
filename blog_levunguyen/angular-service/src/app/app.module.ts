@@ -10,7 +10,7 @@ import { StudentListComponent } from './student-management/student-list/student-
 import { StudentDeleteComponent } from './student-management/student-delete/student-delete.component';
 import { StudentViewComponent } from './student-management/student-view/student-view.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
+import{NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+      NgxPaginationModule
     ],
   providers: [],
   bootstrap: [AppComponent]

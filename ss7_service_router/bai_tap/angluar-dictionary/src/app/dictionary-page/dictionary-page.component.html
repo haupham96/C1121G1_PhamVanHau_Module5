@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <table mdbTable hover="true" striped="true">
+      <thead class="black text-white">
+      <tr>
+        <th>No.</th>
+        <th>Word</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dict of dictionaries;index as i">
+        <td>{{i + 1}}</td>
+        <td>{{dict.eng}}</td>
+        <td><a mdbBtn mdbWavesEffect rounded="true" gradient="aqua" [routerLink]="['/dictionary-detail',dict.id]">Translate</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

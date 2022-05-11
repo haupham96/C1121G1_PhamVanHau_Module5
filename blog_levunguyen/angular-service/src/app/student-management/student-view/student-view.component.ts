@@ -10,7 +10,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
   providers: [StudentService]
 })
 export class StudentViewComponent implements OnInit {
-  student: IStudent = null;
+  student: IStudent = {};
   id = '0';
 
   constructor(private studentService: StudentService, private activatedRoute: ActivatedRoute) {
@@ -22,7 +22,7 @@ export class StudentViewComponent implements OnInit {
     });
 
     this.student = this.studentService.findById(parseInt(this.id));
-    console.log(this.student.name);
+    console.log(this.student);
   }
 
 }

@@ -1,20 +1,20 @@
 <h2>Edit Student</h2>
-<form>
+<form (ngSubmit)="editStudent()">
   <table>
     <tr>
       <td>Name</td>
       <td>
-        <input type="text" [(ngModel)]="student.name">
+        <input type="text" [(ngModel)]="student.name" name="name">
       </td>
     </tr>
     <tr>
       <td>Class:</td>
-      <td><input type="text" [(ngModel)]="student.studyClass"></td>
+      <td><input type="text" [(ngModel)]="student.studyClass" name="studyClass"></td>
     </tr>
     <tr>
       <td><a style="text-decoration:none " [routerLink]="['/']">Back To List Student</a></td>
       <td>
-        <button (click)="editStudent()">Edit</button>
+        <button type="submit">Edit</button>
       </td>
     </tr>
   </table>

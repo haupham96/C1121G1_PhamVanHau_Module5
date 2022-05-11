@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentService} from "../../service/StudentService";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router, Routes} from "@angular/router";
 import {IStudent} from "../../model/IStudent";
 
 @Component({
@@ -9,10 +9,11 @@ import {IStudent} from "../../model/IStudent";
   styleUrls: ['./student-edit.component.css']
 })
 export class StudentEditComponent implements OnInit {
-  student: IStudent ;
+
+  student: IStudent = {};
   id = '0';
 
-  constructor(private studentService: StudentService, private activatedRoute: ActivatedRoute) {
+  constructor(private studentService: StudentService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,5 +26,7 @@ export class StudentEditComponent implements OnInit {
 
   editStudent() {
     console.log(this.student);
+    this.studentService.editStudent(this.student);
+    this.router.navigate(['/']);
   }
 }

@@ -1,0 +1,23 @@
+<h1>Sửa Sản Phẩm</h1>
+<form (submit)="submit()">
+  <table>
+    <tr>
+      <td>Tên sản phẩm:</td>
+      <td><input type="text" name="name" [(ngModel)]="product.name"></td>
+    </tr>
+    <tr>
+      <td>Giá sản phẩm</td>
+      <td><input type="number" name="price" [(ngModel)]="product.price"></td>
+    </tr>
+    <tr>
+      <td>Mô tả về sản phẩm</td>
+      <td><input type="text" name="description" [(ngModel)]="product.description"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Sửa</button>
+      </td>
+    </tr>
+  </table>
+</form>
