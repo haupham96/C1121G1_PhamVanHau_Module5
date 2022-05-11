@@ -4,32 +4,32 @@
   </div>
   <div>
     <div style="display: flex; justify-content: flex-start; flex-direction: column">
-      <a class="btn btn-info col-2 text-light mt-1" href="/contract/create">Create New Contract</a>
+      <a class="btn btn-info col-3 text-white mt-1" mdbBtn mdbWavesEffect>Create New Contract</a>
     </div>
   </div>
   <br>
   <div class="row">
-    <table class="table">
-      <thead class="table-dark">
+    <table mdbTable hover="true" striped="true">
+      <thead class="black white-text">
       <tr>
         <th>No.</th>
         <th>Start Day</th>
         <th>End Day</th>
         <th>Customer Name</th>
         <th>Employee Name</th>
-        <th>Details</th>
+        <th>Service</th>
+        <th>Deposit</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td>12/12/2000</td>
-        <td>01/01/2001</td>
-        <td>Hau</td>
-        <td>Hau1</td>
-        <td>
-          <a class="btn btn-primary text-white text-decoration-none">View</a>
-        </td>
+      <tr *ngFor="let contract of contracts ; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{contract.startDate}}</td>
+        <td>{{contract.endDate}}</td>
+        <td>{{contract.customer.name}}</td>
+        <td>{{contract.employee}}</td>
+        <td>{{contract.service.name}}</td>
+        <td>{{contract.deposit}}</td>
       </tr>
       </tbody>
     </table>
