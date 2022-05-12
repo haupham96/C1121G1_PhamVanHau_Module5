@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h1>List Product</h1>
+    <a [routerLink]="['/product-create']" class="btn btn-primary col-2">Create Product</a>
+    <table class="table table-striped">
+      <thead class="table table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pro of products | paginate : {id:'paginate',itemsPerPage:1,currentPage:page,totalItems:products.length}">
+        <td>{{pro.id}}</td>
+        <td>{{pro.name}}</td>
+        <td><a [routerLink]="['/product-edit',pro.id]" class="btn btn-primary">Edit</a></td>
+        <td><a [routerLink]="['/product-delete',pro.id]" class="btn btn-primary">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="page = $event" id="paginate"></pagination-controls>
+    </div>
+  </div>
+</div>
+

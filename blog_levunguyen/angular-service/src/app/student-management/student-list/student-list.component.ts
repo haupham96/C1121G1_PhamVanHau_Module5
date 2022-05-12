@@ -9,6 +9,7 @@ import {IStudent} from "../../model/IStudent";
 })
 export class StudentListComponent implements OnInit {
 
+
   students: Array<IStudent> = [];
 
   constructor(private studentService: StudentService) {
@@ -18,6 +19,5 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.students = this.studentService.getAllStudent();
   }
-
 
 }

@@ -1,0 +1,22 @@
+<h1 class="text-center text-danger">Delete This Product ???</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+        <table class="table table-striped">
+          <tr>
+            <th class="table table-dark">ID:</th>
+            <td>{{product.id}}</td>
+          </tr>
+          <tr>
+            <th class="table table-dark">Name:</th>
+            <td>{{product.name}}</td>
+          </tr>
+          <tr>
+            <td><a [routerLink]="['/product-list']" class="btn btn-dark">Back</a></td>
+            <td><button class="btn btn-primary" (click)="deleteProduct()">Delete</button></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
