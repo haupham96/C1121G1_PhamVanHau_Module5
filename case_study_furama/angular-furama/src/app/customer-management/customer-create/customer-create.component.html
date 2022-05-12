@@ -1,67 +1,69 @@
 <div class="container">
   <div class="row">
     <div class="col-6 mx-auto">
-      <form method="post">
+      <form [formGroup]="customerForm" (ngSubmit)="createCustomer()">
         <div class="modal-header">
           <h4 class="text-primary">Create new Customer</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Customer Code</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger" ></p>
+            <input type="text" class="form-control" formControlName="customerCode">
+<!--            <div *ngIf="">-->
+
+<!--            </div>-->
           </div>
           <div class="form-group">
             <label>Customer Name</label>
-            <input type="text" class="form-control" >
+            <input type="text" class="form-control" formControlName="name">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Birthday</label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" formControlName="birthday">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Gender</label>
-            <select class="form-select" aria-label="Default select example" >
-              <option value="0">Male</option>
-              <option value="1">Female</option>
+            <select class="form-select" aria-label="Default select example" formControlName="gender">
+              <option value="23" disabled selected>--Select--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
             <br>
           </div>
           <div class="form-group">
             <label>ID Number</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="idCard">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Phone number</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="phone">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="email">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="address">
             <p class="form-helper text-danger"></p>
           </div>
           <div class="form-group">
             <label>Customer Type</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="customerType">
+              <option [ngValue]="null" disabled selected>--Select--</option>
+              <option *ngFor="let type of customerType" [ngValue]="type.name">{{type.name}}</option>
             </select>
             <br>
           </div>
         </div>
         <div class="modal-footer">
-          <a href="/customer" class="btn btn-dark">Cancel</a>
-          <input type="submit" class="btn btn-info" value="Create">
+          <a mdbBtn mdbWavesEffect rounded="true" gradient="purple" type="button">Cancel</a>
+          <button rounded="true" mdbBtn mdbWavesEffect color="cyan" [disabled]="!customerForm.valid" type="submit">Create</button>
         </div>
       </form>
     </div>

@@ -1,5 +1,5 @@
-import {Customer} from "./customer";
-import {Facilities} from "./facilities";
+import {Customer} from '../../customer-management/model/customer';
+import {Service} from '../../service-management/model/service';
 
 export interface Contract {
   id?: number;
@@ -8,6 +8,6 @@ export interface Contract {
   totalMoney?: string;
   customer?: Customer;
   employee?: string;
-  service?: Facilities;
+  service?: Service;
   deposit?: string;
 }

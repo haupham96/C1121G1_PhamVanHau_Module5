@@ -1,4 +1,4 @@
-export interface Facilities {
+export interface Service {
   id?: number;
   serviceCode?: string;
   name?: string;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Facilities} from "../model/facilities";
+import {Service} from "../model/service";
 
 @Component({
   selector: 'app-furama-services',
@@ -7,7 +7,7 @@ import {Facilities} from "../model/facilities";
   styleUrls: ['./furama-services.component.scss']
 })
 export class FuramaServicesComponent implements OnInit {
-  facilities: Array<Facilities> = [
+  facilities: Array<Service> = [
     {
       id: 1,
       serviceCode: "DV-0001",
