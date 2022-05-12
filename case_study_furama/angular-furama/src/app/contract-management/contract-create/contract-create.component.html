@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-6 mx-auto">
-      <form method="post">
+      <form [formGroup]="contractForm" (ngSubmit)="createContract()">
         <div class="modal-header">
           <h4 class="text-primary">Create new Contract</h4>
         </div>

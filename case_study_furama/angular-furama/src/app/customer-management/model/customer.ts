@@ -8,5 +8,5 @@ export interface Customer {
   phone?: string;
   email?: string;
   address?: string;
-  customerType?: number;
+  customerTypeId?: number;
 }
