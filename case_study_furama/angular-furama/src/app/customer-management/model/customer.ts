@@ -3,10 +3,10 @@ export interface Customer {
   customerCode?: string;
   name?: string;
   birthday?: string;
-  gender?: string;
+  gender?: number;
   idCard?: string;
   phone?: string;
   email?: string;
   address?: string;
-  customerType?: string;
+  customerType?: number;
 }

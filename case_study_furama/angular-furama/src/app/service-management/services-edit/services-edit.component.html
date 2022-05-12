@@ -1,54 +1,104 @@
-<div class="container mt-5">
-  <div class="row d-flex justify-content-center">
-    <div class="col-6">
-      <h1 class="text-primary text-center">Edit</h1>
-      <form>
-        <!-- 2 column grid layout with text inputs for the first and last names -->
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" />
-              <label class="form-label" for="form6Example1">Name</label>
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <form [formGroup]="serviceForm" (ngSubmit)="editService()">
+        <div class="modal-header" id="typeId">
+          <h4 class="text-primary">Edit Service</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Service Code</label>
+            <input type="text" class="form-control" formControlName="serviceCode">
+            <div *ngIf="!serviceCode.valid && (serviceCode.touched || serviceCode.dirty)">
+              <p class="aler alert-danger" *ngIf="serviceCode.errors?.required">Required</p>
             </div>
           </div>
+          <div class="form-group">
+            <label>Service Name</label>
+            <input type="text" class="form-control" formControlName="name">
+            <div *ngIf="!name.valid && (name.touched || name.dirty)">
+              <p class="aler alert-danger" *ngIf="name.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="name.errors?.pattern">Must be letters and no numbers</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Area</label>
+            <input type="text" class="form-control" formControlName="area">
+            <div *ngIf="!area.valid && (area.touched || area.dirty)">
+              <p class="aler alert-danger" *ngIf="area.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="area.errors?.pattern">Must be numbers and > 0</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="text" class="form-control" formControlName="price">
+            <div *ngIf="!price.valid && (price.touched || price.dirty)">
+              <p class="aler alert-danger" *ngIf="price.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="price.errors?.pattern">Must be numbers and > 0</p>
+            </div>
+            <br>
+          </div>
+          <div class="form-group">
+            <label>Max People</label>
+            <input type="text" class="form-control" formControlName="maxPeople">
+            <div *ngIf="!maxPeople.valid && (maxPeople.touched || maxPeople.dirty)">
+              <p class="aler alert-danger" *ngIf="maxPeople.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="maxPeople.errors?.pattern">Must be numbers and > 0</p>
+            </div>
+          </div>
+          <div class="form-group" id="roomStandard">
+            <label>Room Standard</label>
+            <input type="text" class="form-control" formControlName="standardRoom">
+            <div *ngIf="!standardRoom.valid && (standardRoom.touched || standardRoom.dirty)">
+              <p class="aler alert-danger" *ngIf="standardRoom.errors?.required">Required</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Other Convenience</label>
+            <input type="text" class="form-control" formControlName="otherConvenience">
+            <div *ngIf="!otherConvenience.valid && (otherConvenience.touched || otherConvenience.dirty)">
+              <p class="aler alert-danger" *ngIf="area.errors?.required">Required</p>
+            </div>
+          </div>
+          <div class="form-group" id="poolArea">
+            <label>Pool Area</label>
+            <input type="text" class="form-control" formControlName="poolArea">
+            <div *ngIf="!poolArea.valid && (poolArea.touched || poolArea.dirty)">
+              <p class="aler alert-danger" *ngIf="poolArea.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="poolArea.errors?.pattern">Must be numbers and > 0</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Floor</label>
+            <input type="text" class="form-control" formControlName="floor">
+            <div *ngIf="!floor.valid && (floor.touched || floor.dirty)">
+              <p class="aler alert-danger" *ngIf="floor.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="floor.errors?.pattern">Must be numbers and > 0</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Service Type</label>
+            <select class="form-select" aria-label="Default select example" formControlName="serviceTypeId">
+              <option *ngFor="let svType of serviceType" [ngValue]="svType.id">{{svType.name}}</option>
+            </select>
+            <br>
+          </div>
+          <div class="form-group">
+            <label>Rent Type</label>
+            <select class="form-select" aria-label="Default select example" formControlName="rentTypeId">
+              <option *ngFor="let rt of rentType" [ngValue]="rt.id">{{rt.name}}</option>
+            </select>
+            <br>
+          </div>
         </div>
-
-        <!-- Text input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="form6Example3" class="form-control" />
-          <label class="form-label" for="form6Example3">Company name</label>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="text" class="form-control" formControlName="image">
         </div>
-
-        <!-- Text input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="form6Example4" class="form-control" />
-          <label class="form-label" for="form6Example4">Address</label>
+        <div class="modal-footer">
+          <a mdbBtn mdbWavesEffect rounded="true" color="pink">Cancel</a>
+          <button [disabled]="!serviceForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true">Edit</button>
         </div>
-
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <input type="email" id="form6Example5" class="form-control" />
-          <label class="form-label" for="form6Example5">Email</label>
-        </div>
-
-        <!-- Number input -->
-        <div class="form-outline mb-4">
-          <input type="number" id="form6Example6" class="form-control" />
-          <label class="form-label" for="form6Example6">Phone</label>
-        </div>
-
-        <!-- Message input -->
-        <div class="form-outline mb-4">
-          <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-          <label class="form-label" for="form6Example7">Additional information</label>
-        </div>
-        <div class="row mb-4">
-          <a href="#" class="btn btn-info col-5">Back</a>
-          <div class="col-2"></div>
-          <button type="submit" class="btn btn-primary col-5">Create</button>
-        </div>
-
-
       </form>
     </div>
   </div>

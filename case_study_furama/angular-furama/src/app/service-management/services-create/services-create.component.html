@@ -1,79 +1,105 @@
 <div class="container">
   <div class="row">
     <div class="col-6 mx-auto">
-      <form method="post">
+      <form [formGroup]="serviceForm" (ngSubmit)="createService()">
         <div class="modal-header" id="typeId">
           <h4 class="text-primary">Create new Service</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Service Code</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="serviceCode">
+            <div *ngIf="!serviceCode.valid && (serviceCode.touched || serviceCode.dirty)">
+              <p class="aler alert-danger" *ngIf="serviceCode.errors?.required">Required</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Service Name</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="name">
+            <div *ngIf="!name.valid && (name.touched || name.dirty)">
+              <p class="aler alert-danger" *ngIf="name.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="name.errors?.pattern">Must be letters and no numbers</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Area</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="area">
+            <div *ngIf="!area.valid && (area.touched || area.dirty)">
+              <p class="aler alert-danger" *ngIf="area.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="area.errors?.pattern">Must be numbers and > 0</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Price</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="price">
+            <div *ngIf="!price.valid && (price.touched || price.dirty)">
+              <p class="aler alert-danger" *ngIf="price.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="price.errors?.pattern">Must be numbers and > 0</p>
+            </div>
             <br>
           </div>
           <div class="form-group">
             <label>Max People</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="maxPeople">
+            <div *ngIf="!maxPeople.valid && (maxPeople.touched || maxPeople.dirty)">
+              <p class="aler alert-danger" *ngIf="maxPeople.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="maxPeople.errors?.pattern">Must be numbers and > 0</p>
+            </div>
           </div>
           <div class="form-group" id="roomStandard">
             <label>Room Standard</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="standardRoom">
+            <div *ngIf="!standardRoom.valid && (standardRoom.touched || standardRoom.dirty)">
+              <p class="aler alert-danger" *ngIf="standardRoom.errors?.required">Required</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Other Convenience</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="otherConvenience">
+            <div *ngIf="!otherConvenience.valid && (otherConvenience.touched || otherConvenience.dirty)">
+              <p class="aler alert-danger" *ngIf="area.errors?.required">Required</p>
+            </div>
           </div>
           <div class="form-group" id="poolArea">
             <label>Pool Area</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="poolArea">
+            <div *ngIf="!poolArea.valid && (poolArea.touched || poolArea.dirty)">
+              <p class="aler alert-danger" *ngIf="poolArea.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="poolArea.errors?.pattern">Must be numbers and > 0</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Floor</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="floor">
+            <div *ngIf="!floor.valid && (floor.touched || floor.dirty)">
+              <p class="aler alert-danger" *ngIf="floor.errors?.required">Required</p>
+              <p class="aler alert-danger" *ngIf="floor.errors?.pattern">Must be numbers and > 0</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Service Type</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="serviceTypeId">
+              <option *ngFor="let svType of serviceType" [ngValue]="svType.id">{{svType.name}}</option>
             </select>
             <br>
           </div>
           <div class="form-group">
             <label>Rent Type</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="rentTypeId">
+              <option *ngFor="let rt of rentType" [ngValue]="rt.id">{{rt.name}}</option>
             </select>
             <br>
           </div>
         </div>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="text" class="form-control" formControlName="image">
+        </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-dark">Cancel</a>
-          <input type="submit" class="btn btn-info text-light" value="Create">
+          <a mdbBtn mdbWavesEffect rounded="true" color="pink">Cancel</a>
+          <button [disabled]="!serviceForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true">
+            Create
+          </button>
         </div>
       </form>
     </div>

@@ -6,8 +6,8 @@ export interface Contract {
   startDate?: string;
   endDate?: string;
   totalMoney?: string;
-  customer?: Customer;
+  customer?: number;
   employee?: string;
-  service?: Service;
+  service?: number;
   deposit?: string;
 }

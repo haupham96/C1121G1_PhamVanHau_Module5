@@ -1,15 +1,15 @@
 export interface Service {
   id?: number;
-  serviceCode?: string;
-  name?: string;
   area?: string;
-  price?: string;
+  floor?: string;
   maxPeople?: string;
-  standardRoom?: string;
+  name?: string;
   otherConvenience?: string;
   poolArea?: string;
-  floor?: string;
-  rentType?: string;
-  serviceType?: string;
+  price?: string;
+  serviceCode?: string;
+  standardRoom?: string;
+  rentTypeId?: number;
+  serviceTypeId?: number;
   image?: string;
 }
