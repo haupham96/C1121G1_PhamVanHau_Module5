@@ -72,13 +72,13 @@
           <div class="form-group">
             <label>Customer Type</label>
             <select class="form-select" aria-label="Default select example" formControlName="customerType">
-              <option *ngFor="let type of customerTypes" [ngValue]="type.id">{{type.name}}</option>
+              <option *ngFor="let type of customerTypes" [ngValue]="type">{{type.name}}</option>
             </select>
             <br>
           </div>
         </div>
         <div class="modal-footer">
-          <a mdbBtn mdbWavesEffect rounded="true" gradient="purple" type="button">Cancel</a>
+          <a [routerLink]="['/customer-list']" mdbBtn mdbWavesEffect rounded="true" gradient="purple" type="button">Cancel</a>
           <button rounded="true" mdbBtn mdbWavesEffect gradient="blue" [disabled]="!customerForm.valid" type="submit">Create</button>
         </div>
       </form>

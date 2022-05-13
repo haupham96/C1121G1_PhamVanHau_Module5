@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RentType} from '../model/rent-type';
+import {ServiceType} from '../model/service-type';
+import {ServicesService} from '../service/services.service';
 
 @Component({
   selector: 'app-services-create',
@@ -8,34 +11,33 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ServicesCreateComponent implements OnInit {
 
-  rentType = [
-    {id: 1, name: 'year'},
-    {id: 2, name: 'month'},
-    {id: 3, name: 'day'},
-    {id: 4, name: 'hour'},
-  ];
-
-  serviceType = [
-    {id: 1, name: 'Villa'},
-    {id: 2, name: 'House'},
-    {id: 3, name: 'Room'},
-  ];
+  rentTypes: RentType[] = [];
+  serviceTypes: ServiceType[] = [];
 
   serviceForm = new FormGroup({
-    id: new FormControl(''),
-    area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-    floor: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-    maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-    name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
-    otherConvenience: new FormControl('', [Validators.required]),
-    poolArea: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-    price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
-    serviceCode: new FormControl('', [Validators.required]),
-    standardRoom: new FormControl('', [Validators.required]),
-    rentTypeId: new FormControl(4, [Validators.required]),
-    serviceTypeId: new FormControl(1, [Validators.required]),
-    image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
+    id: new FormControl(),
   });
+
+  constructor(private servicesService: ServicesService) {
+    this.rentTypes = this.servicesService.rentTypes;
+    this.serviceTypes = this.servicesService.serviceTypes;
+
+    this.serviceForm = new FormGroup({
+      id: new FormControl(''),
+      area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      floor: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
+      otherConvenience: new FormControl('', [Validators.required]),
+      poolArea: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
+      serviceCode: new FormControl('', [Validators.required]),
+      standardRoom: new FormControl('', [Validators.required]),
+      rentType: new FormControl(this.rentTypes[0], [Validators.required]),
+      serviceType: new FormControl(this.serviceTypes[0], [Validators.required]),
+      image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
+    });
+  }
 
   get id() {
     return this.serviceForm.get('id');
@@ -83,9 +85,6 @@ export class ServicesCreateComponent implements OnInit {
 
   get serviceTypeId() {
     return this.serviceForm.get('serviceTypeId');
-  }
-
-  constructor() {
   }
 
   ngOnInit(): void {

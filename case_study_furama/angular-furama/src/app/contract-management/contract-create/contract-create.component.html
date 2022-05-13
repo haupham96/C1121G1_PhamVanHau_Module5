@@ -8,50 +8,53 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Start Day</label>
-            <input type="date" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="date" class="form-control" formControlName="startDate">
+            <div *ngIf="!startDate.valid && (startDate.touched || startDate.dirty)">
+              <p class="alert alert-danger" *ngIf="startDate.errors?.required">Requierd</p>
+              <p class="alert alert-danger" *ngIf="startDate.errors?.pattern">Invalid Date</p>
+            </div>
           </div>
           <div class="form-group">
             <label>End Day</label>
-            <input type="date" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="date" class="form-control" formControlName="endDate">
+            <div *ngIf="!endDate.valid && (endDate.touched || endDate.dirty)">
+              <p class="alert alert-danger" *ngIf="endDate.errors?.required">Required</p>
+              <p class="alert alert-danger" *ngIf="endDate.errors?.pattern">Invalid Date</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Deposit</label>
-            <input type="text" class="form-control">
-            <p class="form-helper text-danger"></p>
+            <input type="text" class="form-control" formControlName="deposit">
+            <div *ngIf="!deposit.valid && (deposit.touched || deposit.dirty)">
+              <p class="alert alert-danger" *ngIf="deposit.errors?.required">Requierd</p>
+              <p class="alert alert-danger" *ngIf="deposit.errors?.pattern">Must be >0</p>
+            </div>
           </div>
           <div class="form-group">
             <label>Customer</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="customer">
+              <option *ngFor="let cus of customers" [ngValue]="cus">{{cus.name}}</option>
             </select>
             <br>
           </div>
           <div class="form-group">
             <label>Employee</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="employee">
+              <option *ngFor="let emp of employees" [ngValue]="emp">{{emp.name}}</option>
             </select>
             <br>
           </div>
           <div class="form-group">
             <label>Service</label>
-            <select class="form-select" aria-label="Default select example">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+            <select class="form-select" aria-label="Default select example" formControlName="service">
+              <option *ngFor="let sv of services" [ngValue]="sv">{{sv.name}}</option>
             </select>
             <br>
           </div>
         </div>
         <div class="modal-footer">
-          <a href="/home" class="btn btn-dark">Cancel</a>
-          <input type="submit" class="btn btn-info text-light" value="Create">
+          <a [routerLink]="['/contract-list']" mdbBtn mdbWavesEffect gradient="purple" rounded="true">Cancel</a>
+          <button [disabled]="!contractForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true" value="Create">Create</button>
         </div>
       </form>
     </div>

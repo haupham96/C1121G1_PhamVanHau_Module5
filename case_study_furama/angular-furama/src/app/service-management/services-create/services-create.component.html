@@ -78,15 +78,15 @@
           </div>
           <div class="form-group">
             <label>Service Type</label>
-            <select class="form-select" aria-label="Default select example" formControlName="serviceTypeId">
-              <option *ngFor="let svType of serviceType" [ngValue]="svType.id">{{svType.name}}</option>
+            <select class="form-select" aria-label="Default select example" formControlName="serviceType">
+              <option *ngFor="let svType of serviceTypes" [ngValue]="svType">{{svType.name}}</option>
             </select>
             <br>
           </div>
           <div class="form-group">
             <label>Rent Type</label>
-            <select class="form-select" aria-label="Default select example" formControlName="rentTypeId">
-              <option *ngFor="let rt of rentType" [ngValue]="rt.id">{{rt.name}}</option>
+            <select class="form-select" aria-label="Default select example" formControlName="rentType">
+              <option *ngFor="let rt of rentTypes" [ngValue]="rt">{{rt.name}}</option>
             </select>
             <br>
           </div>
@@ -96,7 +96,7 @@
           <input type="text" class="form-control" formControlName="image">
         </div>
         <div class="modal-footer">
-          <a mdbBtn mdbWavesEffect rounded="true" color="pink">Cancel</a>
+          <a [routerLink]="['/']" mdbBtn mdbWavesEffect rounded="true" color="pink">Cancel</a>
           <button [disabled]="!serviceForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true">
             Create
           </button>

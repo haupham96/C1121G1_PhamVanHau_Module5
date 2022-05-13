@@ -3,8 +3,8 @@
     <h1 class="text-primary">List Contract</h1>
   </div>
   <div>
-    <div style="display: flex; justify-content: flex-start; flex-direction: column">
-      <a class="btn btn-info col-3 text-white mt-1" mdbBtn mdbWavesEffect>Create New Contract</a>
+    <div class="col-3" style="display: flex; justify-content: flex-start; flex-direction: column">
+      <button [routerLink]="['/contract-create']" color="cyan" rounded="true" mdbBtn mdbWavesEffect>Create New Contract</button>
     </div>
   </div>
   <br>
@@ -26,9 +26,9 @@
         <td>{{i + 1}}</td>
         <td>{{contract.startDate}}</td>
         <td>{{contract.endDate}}</td>
-        <td>{{contract.customerId}}</td>
-        <td>{{contract.employeeId}}</td>
-        <td>{{contract.serviceId}}</td>
+        <td>{{contract.customer.name}}</td>
+        <td>{{contract.employee.name}}</td>
+        <td>{{contract.service.name}}</td>
         <td>{{contract.deposit}}</td>
       </tr>
       </tbody>

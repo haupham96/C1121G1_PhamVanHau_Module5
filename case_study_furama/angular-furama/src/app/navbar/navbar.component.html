@@ -27,33 +27,13 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Customer</a>
+          <a class="nav-link" [routerLink]="['/customer-list']">Customer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Employee</a>
+          <a class="nav-link" [routerLink]="['/contract-list']">Contract</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Service</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdownMenuLink1"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Contract
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-            <li>
-              <a class="dropdown-item" href="#">Create Contract</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Contract Details</a>
-            </li>
-          </ul>
+          <a class="nav-link" [routerLink]="['/']">Service</a>
         </li>
       </ul>
       <!-- Left links -->

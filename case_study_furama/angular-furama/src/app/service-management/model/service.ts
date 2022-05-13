@@ -1,3 +1,6 @@
+import {RentType} from './rent-type';
+import {ServiceType} from './service-type';
+
 export interface Service {
   id?: number;
   area?: string;
@@ -9,7 +12,7 @@ export interface Service {
   price?: string;
   serviceCode?: string;
   standardRoom?: string;
-  rentTypeId?: number;
-  serviceTypeId?: number;
+  rentType?: RentType;
+  serviceType?: ServiceType;
   image?: string;
 }

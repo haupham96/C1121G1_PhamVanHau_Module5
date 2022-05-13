@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-3 mt-4">
-      <button mdbBtn mdbWavesEffect gradient="aqua">Create new Facility</button>
+      <button [routerLink]="['/services-create']" mdbBtn mdbWavesEffect gradient="aqua">Create new Facility</button>
     </div>
   </div>
   <div class="row">
-    <div class="col-4 mt-4" *ngFor="let fac of facilities">
+    <div class="col-4 mt-4" *ngFor="let fac of services">
       <!-- Card -->
       <mdb-card>
         <div class="view rgba-white-slight waves-light" mdbWavesEffect>
@@ -27,8 +27,12 @@
               <mdb-card-text>Room standard : {{fac.standardRoom}}</mdb-card-text>
               <mdb-card-text>Area : {{fac.area}}</mdb-card-text>
             </div>
+            <div class="row d-flex flex-center">
+              <a class="col-6 text-center" [routerLink]="['/services-edit',fac.id]" mdbBtn gradient="blue" mdbWavesEffect>Edit</a>
+              <a class="col-6 text-center" mdbBtn gradient="purple" mdbWavesEffect>Delete</a>
+            </div>
 
-            <a mdbBtn gradient="blue" mdbWavesEffect>Edit</a>
+
           </div>
         </mdb-card-body>
       </mdb-card>
