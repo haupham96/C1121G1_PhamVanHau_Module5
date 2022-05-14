@@ -15,18 +15,26 @@ export class ProductEditComponent implements OnInit {
 
   product: Product = {};
 
-  constructor(private service: ProductService, private activatedRoute: ActivatedRoute, private router: Router) {
+  productForm = new FormGroup({});
 
+  constructor(private service: ProductService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
       this.id = parseInt(param.get('id'));
       this.product = this.service.findById(this.id);
+      this.productForm = new FormGroup({
+        id: new FormControl(this.product.id),
+        name: new FormControl(this.product.name),
+        price: new FormControl(this.product.price),
+        description: new FormControl(this.product.description),
+      });
     });
   }
 
   submit() {
+    this.product = this.productForm.value;
     this.service.editProduct(this.product);
     this.router.navigate(['product/list']);
   }

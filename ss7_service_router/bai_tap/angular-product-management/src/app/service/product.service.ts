@@ -59,9 +59,7 @@ export class ProductService {
   editProduct(product: Product) {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].id === product.id) {
-        this.products[i].price = product.price;
-        this.products[i].description = product.description;
-        this.products[i].name = product.name;
+        this.products[i] = product;
       }
     }
   }

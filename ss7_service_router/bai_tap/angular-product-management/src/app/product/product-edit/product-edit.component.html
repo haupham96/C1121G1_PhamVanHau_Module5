@@ -1,23 +1,25 @@
 <h1>Sửa Sản Phẩm</h1>
-<form (submit)="submit()">
+<form [formGroup]="productForm" (ngSubmit)="submit()">
   <table>
     <tr>
+      <td>Mã sản phẩm:</td>
+      <td><input type="number" formControlName="id"></td>
+    </tr>
+    <tr>
       <td>Tên sản phẩm:</td>
-      <td><input type="text" name="name" [(ngModel)]="product.name"></td>
+      <td><input type="text" formControlName="name"></td>
     </tr>
     <tr>
       <td>Giá sản phẩm</td>
-      <td><input type="number" name="price" [(ngModel)]="product.price"></td>
+      <td><input type="number" formControlName="price"></td>
     </tr>
     <tr>
       <td>Mô tả về sản phẩm</td>
-      <td><input type="text" name="description" [(ngModel)]="product.description"></td>
+      <td><input type="text" formControlName="description"></td>
     </tr>
     <tr>
       <td></td>
-      <td>
-        <button type="submit">Sửa</button>
-      </td>
+      <td><button type="submit">Sửa</button></td>
     </tr>
   </table>
 </form>

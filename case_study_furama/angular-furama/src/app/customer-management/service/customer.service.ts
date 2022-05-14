@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CustomerType} from '../model/customer-type';
 import {Customer} from '../model/customer';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +56,13 @@ export class CustomerService {
     },
   ];
 
+  url = 'http://localhost:8080';
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+  findAllCustomer(page: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/customer?page=${page}`);
   }
 
   deleteById(idDelete: number) {

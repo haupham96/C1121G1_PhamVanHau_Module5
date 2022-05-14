@@ -15,6 +15,10 @@ export class CustomerListComponent implements OnInit {
   message = '';
 
   idDelete = 0;
+
+  number = 0;
+  totalPages = 0;
+
   nameDelete = '';
 
   customerTypes: CustomerType[] = [];
@@ -23,7 +27,39 @@ export class CustomerListComponent implements OnInit {
 
   constructor(private customerService: CustomerService, private router: Router) {
     this.customerTypes = this.customerService.customerTypes;
-    this.customers = this.customerService.customers;
+    this.customerService.findAllCustomer(this.number).subscribe(
+      (data) => {
+        this.customers = data.content;
+        this.number = data.number;
+        this.totalPages = data.totalPages;
+      }, err => console.log(err)
+    );
+  }
+
+  next() {
+    if (this.number < this.totalPages - 1) {
+      this.customerService.findAllCustomer(this.number + 1).subscribe(
+        data => {
+          this.customers = data.content;
+          this.number = data.number;
+          this.totalPages = data.totalPages;
+          console.log(data);
+        }, err => console.log(err)
+      );
+    }
+
+  }
+
+  previous() {
+    if (this.number > 0) {
+      this.customerService.findAllCustomer(this.number - 1).subscribe(
+        data => {
+          this.customers = data.content;
+          this.number = data.number;
+          console.log(data);
+        }, err => console.log(err)
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -43,4 +79,5 @@ export class CustomerListComponent implements OnInit {
     this.idDelete = id;
     this.nameDelete = name;
   }
+
 }
