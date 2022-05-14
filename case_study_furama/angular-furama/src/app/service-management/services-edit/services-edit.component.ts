@@ -39,7 +39,7 @@ export class ServicesEditComponent implements OnInit {
       area: new FormControl(this.service.area, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
       floor: new FormControl(this.service.floor, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
       maxPeople: new FormControl(this.service.maxPeople, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      name: new FormControl(this.service.name, [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
+      name: new FormControl(this.service.name, [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
       otherConvenience: new FormControl(this.service.otherConvenience, [Validators.required]),
       poolArea: new FormControl(this.service.poolArea, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
       price: new FormControl(this.service.price, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
@@ -49,6 +49,7 @@ export class ServicesEditComponent implements OnInit {
       serviceType: new FormControl(this.service.serviceType, [Validators.required]),
       image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
     });
+    this.checkServiceTypeValidate(this.changeType.id);
   }
 
 
@@ -108,11 +109,45 @@ export class ServicesEditComponent implements OnInit {
   }
 
   editService() {
-    console.log(this.serviceForm.value);
+    const service: Service = Object.assign({}, this.serviceForm.value);
+    console.log(service);
+    this.servicesService.edit(service);
   }
 
   serviceTypeChange() {
     this.changeType = this.serviceForm.get('serviceType').value;
-    console.log(this.changeType);
+    this.checkServiceTypeValidate(this.changeType.id);
   }
+
+  checkServiceTypeValidate(changeType: number) {
+    if (changeType === 2) {
+      this.serviceForm.get('floor').enable();
+
+      this.serviceForm.get('floor').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+
+      this.serviceForm.get('poolArea').disable();
+
+      this.serviceForm.get('floor').updateValueAndValidity();
+      this.serviceForm.get('poolArea').updateValueAndValidity();
+    }
+    if (changeType === 1) {
+      this.serviceForm.get('floor').enable();
+      this.serviceForm.get('poolArea').enable();
+
+      this.serviceForm.get('floor').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+      this.serviceForm.get('poolArea').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+
+      this.serviceForm.get('floor').updateValueAndValidity();
+      this.serviceForm.get('poolArea').updateValueAndValidity();
+    }
+    if (changeType === 3) {
+
+      this.serviceForm.get('floor').disable();
+      this.serviceForm.get('poolArea').disable();
+
+      this.serviceForm.get('floor').updateValueAndValidity();
+      this.serviceForm.get('poolArea').updateValueAndValidity();
+    }
+  }
+
 }

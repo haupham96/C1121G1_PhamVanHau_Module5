@@ -11,12 +11,6 @@ import {ServicesService} from '../../service-management/service/services.service
 })
 export class ContractService {
 
-  employees: Employee[] = [
-    {id: 1, name: 'Hau1'},
-    {id: 2, name: 'Hau2'},
-    {id: 3, name: 'Hau3'},
-  ];
-
   customers: Customer[] = [];
 
   services: Service[] = [];
@@ -31,24 +25,25 @@ export class ContractService {
       {
         id: 1, startDate: '2000-01-01', endDate: '2000-01-11', totalMoney: '1000',
         customer: this.customers[0],
-        employee: this.employees[0],
         service: this.services[0],
         deposit: '500'
       },
       {
         id: 2, startDate: '2000-02-02', endDate: '2000-02-22', totalMoney: '2000',
         customer: this.customers[1],
-        employee: this.employees[1],
         service: this.services[1],
         deposit: '1500'
       },
       {
         id: 3, startDate: '2000-03-03', endDate: '2000-03-33', totalMoney: '3000',
         customer: this.customers[2],
-        employee: this.employees[2],
         service: this.services[2],
         deposit: '2000'
       },
     ];
+  }
+
+  save(contract: Contract) {
+    this.contracts.push(contract);
   }
 }

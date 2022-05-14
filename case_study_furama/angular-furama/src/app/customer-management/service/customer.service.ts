@@ -61,7 +61,7 @@ export class CustomerService {
   deleteById(idDelete: number) {
     for (let i = 0; i < this.customers.length; i++) {
       if (this.customers[i].id === idDelete) {
-        this.customers.slice(i, 1);
+        this.customers.splice(i, 1);
       }
     }
   }

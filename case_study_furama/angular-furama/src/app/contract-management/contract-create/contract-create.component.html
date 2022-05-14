@@ -38,13 +38,6 @@
             <br>
           </div>
           <div class="form-group">
-            <label>Employee</label>
-            <select class="form-select" aria-label="Default select example" formControlName="employee">
-              <option *ngFor="let emp of employees" [ngValue]="emp">{{emp.name}}</option>
-            </select>
-            <br>
-          </div>
-          <div class="form-group">
             <label>Service</label>
             <select class="form-select" aria-label="Default select example" formControlName="service">
               <option *ngFor="let sv of services" [ngValue]="sv">{{sv.name}}</option>

@@ -89,4 +89,11 @@ export class ServicesService {
     }
   }
 
+  edit(service: Service) {
+    for (let i = 0; i < this.services.length; i++) {
+      if (this.services[i].id === service.id) {
+        this.services[i] = service;
+      }
+    }
+  }
 }

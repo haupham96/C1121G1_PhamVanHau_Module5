@@ -31,7 +31,7 @@ export class ServicesCreateComponent implements OnInit {
       area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
       floor: new FormControl(''),
       maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
+      name: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
       otherConvenience: new FormControl('', [Validators.required]),
       poolArea: new FormControl(''),
       price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
@@ -41,6 +41,7 @@ export class ServicesCreateComponent implements OnInit {
       serviceType: new FormControl(this.serviceTypes[0], [Validators.required]),
       image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
     });
+    this.checkServiceTypeValidate(this.changeType.id);
   }
 
   get id() {
@@ -96,6 +97,7 @@ export class ServicesCreateComponent implements OnInit {
 
   createService() {
     const service: Service = Object.assign({}, this.serviceForm.value);
+    console.log(service);
     this.servicesService.save(service);
     alert('Create Success!');
     this.router.navigate(['/services-list']);
@@ -103,5 +105,33 @@ export class ServicesCreateComponent implements OnInit {
 
   changeServiceType() {
     this.changeType = this.serviceForm.get('serviceType').value;
+    this.checkServiceTypeValidate(this.changeType.id);
+  }
+
+  checkServiceTypeValidate(changeType: number) {
+    if (changeType === 2) {
+      this.serviceForm.get('floor').enable();
+      this.serviceForm.get('poolArea').disable();
+
+      this.serviceForm.get('floor').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+
+      this.serviceForm.get('floor').updateValueAndValidity();
+    }
+    if (changeType === 1) {
+      this.serviceForm.get('floor').enable();
+      this.serviceForm.get('poolArea').enable();
+
+      this.serviceForm.get('floor').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+      this.serviceForm.get('poolArea').setValidators([Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]);
+
+      this.serviceForm.get('floor').updateValueAndValidity();
+      this.serviceForm.get('poolArea').updateValueAndValidity();
+    }
+    if (changeType === 3) {
+
+      this.serviceForm.get('floor').disable();
+      this.serviceForm.get('poolArea').disable();
+
+    }
   }
 }
