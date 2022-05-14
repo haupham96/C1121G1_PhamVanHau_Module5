@@ -7,6 +7,14 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
+            <label>Service Type</label>
+            <select (change)="serviceTypeChange()" [compareWith]="compareFn" class="form-select"
+                    aria-label="Default select example" formControlName="serviceType">
+              <option *ngFor="let svType of serviceTypes" [ngValue]="svType">{{svType.name}}</option>
+            </select>
+            <br>
+          </div>
+          <div class="form-group">
             <label>Service Code</label>
             <input type="text" class="form-control" formControlName="serviceCode">
             <div *ngIf="!serviceCode.valid && (serviceCode.touched || serviceCode.dirty)">
@@ -60,7 +68,7 @@
               <p class="aler alert-danger" *ngIf="area.errors?.required">Required</p>
             </div>
           </div>
-          <div class="form-group" id="poolArea">
+          <div [hidden]="changeType.id != 1" class="form-group" id="poolArea">
             <label>Pool Area</label>
             <input type="text" class="form-control" formControlName="poolArea">
             <div *ngIf="!poolArea.valid && (poolArea.touched || poolArea.dirty)">
@@ -68,7 +76,7 @@
               <p class="aler alert-danger" *ngIf="poolArea.errors?.pattern">Must be numbers and > 0</p>
             </div>
           </div>
-          <div class="form-group">
+          <div [hidden]="changeType.id==3" class="form-group">
             <label>Floor</label>
             <input type="text" class="form-control" formControlName="floor">
             <div *ngIf="!floor.valid && (floor.touched || floor.dirty)">
@@ -77,15 +85,9 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Service Type</label>
-            <select class="form-select" aria-label="Default select example" formControlName="serviceType">
-              <option *ngFor="let svType of serviceTypes" [ngValue]="svType">{{svType.name}}</option>
-            </select>
-            <br>
-          </div>
-          <div class="form-group">
             <label>Rent Type</label>
-            <select class="form-select" aria-label="Default select example" formControlName="rentType">
+            <select [compareWith]="compareFn" class="form-select" aria-label="Default select example"
+                    formControlName="rentType">
               <option *ngFor="let rt of rentTypes" [ngValue]="rt">{{rt.name}}</option>
             </select>
             <br>
@@ -97,7 +99,9 @@
         </div>
         <div class="modal-footer">
           <a [routerLink]="['/']" mdbBtn mdbWavesEffect rounded="true" color="pink">Cancel</a>
-          <button [disabled]="!serviceForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true">Edit</button>
+          <button [disabled]="!serviceForm.valid" type="submit" mdbBtn mdbWavesEffect gradient="blue" rounded="true">
+            Edit
+          </button>
         </div>
       </form>
     </div>

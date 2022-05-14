@@ -28,8 +28,10 @@
               <mdb-card-text>Area : {{fac.area}}</mdb-card-text>
             </div>
             <div class="row d-flex flex-center">
-              <a class="col-6 text-center" [routerLink]="['/services-edit',fac.id]" mdbBtn gradient="blue" mdbWavesEffect>Edit</a>
-              <a class="col-6 text-center" mdbBtn gradient="purple" mdbWavesEffect>Delete</a>
+              <a class="col-5 text-center" [routerLink]="['/services-edit',fac.id]" mdbBtn gradient="blue" mdbWavesEffect>Edit</a>
+              <button type="button" mdbBtn gradient="purple" class="relative waves-light col-5"
+                      (click)="basicModal.show() ; getInforDelete(fac.id,fac.name)" mdbWavesEffect>Delete
+              </button>
             </div>
 
 
@@ -59,6 +61,33 @@
           </li>
         </ul>
       </nav>
+    </div>
+  </div>
+</div>
+
+<!--delete modal-->
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Delete this Customer ?</h4>
+      </div>
+      <div class="modal-body">
+        <p class="deep-orange-text">{{nameDelete}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="basicModal.hide()" mdbWavesEffect>Close
+        </button>
+        <button (click)="deleteService(basicModal)" type="button" mdbBtn color="primary" class="relative waves-light"
+                mdbWavesEffect>Delete
+        </button>
+      </div>
     </div>
   </div>
 </div>

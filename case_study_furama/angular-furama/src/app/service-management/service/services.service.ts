@@ -71,4 +71,22 @@ export class ServicesService {
 
   constructor() {
   }
+
+  save(service: Service) {
+    this.services.push(service);
+  }
+
+  findById(id: number): Service {
+    return this.services.find(item => item.id === id);
+  }
+
+  deleteById(idDelete: number) {
+    for (let i = 0; i < this.services.length; i++) {
+      if (this.services[i].id === idDelete) {
+        this.services.splice(i, 1);
+        break;
+      }
+    }
+  }
+
 }

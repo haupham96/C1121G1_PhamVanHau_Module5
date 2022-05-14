@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RentType} from '../model/rent-type';
 import {ServiceType} from '../model/service-type';
 import {ServicesService} from '../service/services.service';
+import {Service} from '../model/service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-services-create',
@@ -11,6 +13,8 @@ import {ServicesService} from '../service/services.service';
 })
 export class ServicesCreateComponent implements OnInit {
 
+  changeType: ServiceType = {id: 1, name: 'Villa'};
+
   rentTypes: RentType[] = [];
   serviceTypes: ServiceType[] = [];
 
@@ -18,18 +22,18 @@ export class ServicesCreateComponent implements OnInit {
     id: new FormControl(),
   });
 
-  constructor(private servicesService: ServicesService) {
+  constructor(private servicesService: ServicesService, private router: Router) {
     this.rentTypes = this.servicesService.rentTypes;
     this.serviceTypes = this.servicesService.serviceTypes;
 
     this.serviceForm = new FormGroup({
       id: new FormControl(''),
       area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      floor: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      floor: new FormControl(''),
       maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
       name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
       otherConvenience: new FormControl('', [Validators.required]),
-      poolArea: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      poolArea: new FormControl(''),
       price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
       serviceCode: new FormControl('', [Validators.required]),
       standardRoom: new FormControl('', [Validators.required]),
@@ -91,6 +95,13 @@ export class ServicesCreateComponent implements OnInit {
   }
 
   createService() {
-    console.log(this.serviceForm.value);
+    const service: Service = Object.assign({}, this.serviceForm.value);
+    this.servicesService.save(service);
+    alert('Create Success!');
+    this.router.navigate(['/services-list']);
+  }
+
+  changeServiceType() {
+    this.changeType = this.serviceForm.get('serviceType').value;
   }
 }

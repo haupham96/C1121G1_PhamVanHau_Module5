@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ServicesService} from '../service/services.service';
 import {RentType} from '../model/rent-type';
 import {ServiceType} from '../model/service-type';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {Service} from '../model/service';
 
 @Component({
   selector: 'app-services-edit',
@@ -11,30 +13,40 @@ import {ServiceType} from '../model/service-type';
 })
 export class ServicesEditComponent implements OnInit {
 
+  changeType: ServiceType = {id: 1, name: 'Villa'};
+
   rentTypes: RentType[] = [];
 
   serviceTypes: ServiceType[] = [];
+
+  service: Service = {};
 
   serviceForm = new FormGroup({
     id: new FormControl(''),
   });
 
-  constructor(private servicesService: ServicesService) {
+  constructor(private servicesService: ServicesService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
+      // tslint:disable-next-line:radix
+      const id = parseInt(param.get('id'));
+      this.service = this.servicesService.findById(id);
+      this.changeType = this.service.serviceType;
+    });
     this.rentTypes = this.servicesService.rentTypes;
     this.serviceTypes = this.servicesService.serviceTypes;
     this.serviceForm = new FormGroup({
-      id: new FormControl(''),
-      area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      floor: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
-      otherConvenience: new FormControl('', [Validators.required]),
-      poolArea: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
-      serviceCode: new FormControl('', [Validators.required]),
-      standardRoom: new FormControl('', [Validators.required]),
-      rentType: new FormControl(this.rentTypes[0], [Validators.required]),
-      serviceType: new FormControl(this.serviceTypes[0], [Validators.required]),
+      id: new FormControl(this.service.id),
+      area: new FormControl(this.service.area, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      floor: new FormControl(this.service.floor, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      maxPeople: new FormControl(this.service.maxPeople, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      name: new FormControl(this.service.name, [Validators.required, Validators.pattern('^[a-zA-Z]{1,250}$')]),
+      otherConvenience: new FormControl(this.service.otherConvenience, [Validators.required]),
+      poolArea: new FormControl(this.service.poolArea, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      price: new FormControl(this.service.price, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
+      serviceCode: new FormControl(this.service.serviceCode, [Validators.required]),
+      standardRoom: new FormControl(this.service.standardRoom, [Validators.required]),
+      rentType: new FormControl(this.service.rentType, [Validators.required]),
+      serviceType: new FormControl(this.service.serviceType, [Validators.required]),
       image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
     });
   }
@@ -91,8 +103,16 @@ export class ServicesEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  compareFn(t1: any, t2: any) {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
+  }
+
   editService() {
     console.log(this.serviceForm.value);
   }
 
+  serviceTypeChange() {
+    this.changeType = this.serviceForm.get('serviceType').value;
+    console.log(this.changeType);
+  }
 }

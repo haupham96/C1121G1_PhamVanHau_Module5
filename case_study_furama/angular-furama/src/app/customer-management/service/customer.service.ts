@@ -62,7 +62,6 @@ export class CustomerService {
     for (let i = 0; i < this.customers.length; i++) {
       if (this.customers[i].id === idDelete) {
         this.customers.slice(i, 1);
-        console.log(this.customers.slice(i, 1));
       }
     }
   }
@@ -70,4 +69,23 @@ export class CustomerService {
   save(customer: Customer) {
     this.customers.push(customer);
   }
+
+  findById(id: number): Customer {
+    for (const c of this.customers) {
+      if (c.id === id) {
+        return c;
+      }
+    }
+    return null;
+  }
+
+  editCustomer(customer: Customer) {
+    for (let i = 0; i < this.customers.length; i++) {
+      if (this.customers[i].id === customer.id) {
+        this.customers[i] = customer;
+        break;
+      }
+    }
+  }
+
 }
