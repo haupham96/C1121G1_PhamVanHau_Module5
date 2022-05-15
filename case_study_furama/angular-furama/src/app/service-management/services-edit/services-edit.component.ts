@@ -23,33 +23,52 @@ export class ServicesEditComponent implements OnInit {
 
   serviceForm = new FormGroup({
     id: new FormControl(''),
+    area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    floor: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    name: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
+    otherConvenience: new FormControl('', [Validators.required]),
+    poolArea: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
+    serviceCode: new FormControl('', [Validators.required]),
+    standardRoom: new FormControl('', [Validators.required]),
+    rentType: new FormControl('', [Validators.required]),
+    serviceType: new FormControl('', [Validators.required]),
+    image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
   });
 
   constructor(private servicesService: ServicesService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
       // tslint:disable-next-line:radix
       const id = parseInt(param.get('id'));
-      this.service = this.servicesService.findById(id);
-      this.changeType = this.service.serviceType;
+      this.servicesService.findById(id).subscribe(data => {
+          this.service = data;
+          this.changeType = this.service.serviceType;
+          this.rentTypes = this.servicesService.rentTypes;
+          this.serviceTypes = this.servicesService.serviceTypes;
+          this.serviceForm = new FormGroup({
+            id: new FormControl(this.service.id),
+            area: new FormControl(this.service.area, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+            floor: new FormControl(this.service.floor, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+            // tslint:disable-next-line:max-line-length
+            maxPeople: new FormControl(this.service.maxPeople, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+            name: new FormControl(this.service.name, [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
+            otherConvenience: new FormControl(this.service.otherConvenience, [Validators.required]),
+            // tslint:disable-next-line:max-line-length
+            poolArea: new FormControl(this.service.poolArea, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+            price: new FormControl(this.service.price, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
+            serviceCode: new FormControl(this.service.serviceCode, [Validators.required]),
+            standardRoom: new FormControl(this.service.standardRoom, [Validators.required]),
+            rentType: new FormControl(this.service.rentType, [Validators.required]),
+            serviceType: new FormControl(this.service.serviceType, [Validators.required]),
+            image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
+          });
+          this.checkServiceTypeValidate(this.changeType.id);
+        },
+        err => {
+          console.log(err);
+        });
     });
-    this.rentTypes = this.servicesService.rentTypes;
-    this.serviceTypes = this.servicesService.serviceTypes;
-    this.serviceForm = new FormGroup({
-      id: new FormControl(this.service.id),
-      area: new FormControl(this.service.area, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      floor: new FormControl(this.service.floor, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      maxPeople: new FormControl(this.service.maxPeople, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      name: new FormControl(this.service.name, [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
-      otherConvenience: new FormControl(this.service.otherConvenience, [Validators.required]),
-      poolArea: new FormControl(this.service.poolArea, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
-      price: new FormControl(this.service.price, [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
-      serviceCode: new FormControl(this.service.serviceCode, [Validators.required]),
-      standardRoom: new FormControl(this.service.standardRoom, [Validators.required]),
-      rentType: new FormControl(this.service.rentType, [Validators.required]),
-      serviceType: new FormControl(this.service.serviceType, [Validators.required]),
-      image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
-    });
-    this.checkServiceTypeValidate(this.changeType.id);
   }
 
 
@@ -110,8 +129,14 @@ export class ServicesEditComponent implements OnInit {
 
   editService() {
     const service: Service = Object.assign({}, this.serviceForm.value);
-    console.log(service);
-    this.servicesService.edit(service);
+    this.servicesService.edit(service).subscribe(() => {
+        alert('Edit Success !');
+        this.router.navigate(['/services-list']);
+      },
+      err => {
+        console.log(err);
+        alert('Failed to Edit !');
+      });
   }
 
   serviceTypeChange() {

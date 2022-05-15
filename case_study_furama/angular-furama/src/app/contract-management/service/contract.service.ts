@@ -5,45 +5,26 @@ import {Service} from '../../service-management/model/service';
 import {Contract} from '../model/contract';
 import {CustomerService} from '../../customer-management/service/customer.service';
 import {ServicesService} from '../../service-management/service/services.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractService {
 
-  customers: Customer[] = [];
-
   services: Service[] = [];
 
-  contracts: Contract[] = [];
+  url = 'http://localhost:8080/contract';
 
-  constructor(private customerService: CustomerService, private servicesService: ServicesService) {
-    this.services = this.servicesService.services;
-    this.customers = this.customerService.customers;
-
-    this.contracts = [
-      {
-        id: 1, startDate: '2000-01-01', endDate: '2000-01-11', totalMoney: '1000',
-        customer: this.customers[0],
-        service: this.services[0],
-        deposit: '500'
-      },
-      {
-        id: 2, startDate: '2000-02-02', endDate: '2000-02-22', totalMoney: '2000',
-        customer: this.customers[1],
-        service: this.services[1],
-        deposit: '1500'
-      },
-      {
-        id: 3, startDate: '2000-03-03', endDate: '2000-03-33', totalMoney: '3000',
-        customer: this.customers[2],
-        service: this.services[2],
-        deposit: '2000'
-      },
-    ];
+  constructor(private customerService: CustomerService, private servicesService: ServicesService, private http: HttpClient) {
   }
 
-  save(contract: Contract) {
-    this.contracts.push(contract);
+  save(contract: Contract): Observable<Contract> {
+    return this.http.post(`${this.url}/create`, contract);
+  }
+
+  getAllContract(): Observable<any> {
+    return this.http.get<any>(`${this.url}`);
   }
 }

@@ -21,9 +21,15 @@ public class CustomerRestController {
     private ICustomerService customerService;
 
     @GetMapping("")
-    public ResponseEntity<Page<Customer>> listCustomer(@PageableDefault(value = 1) Pageable pageable) {
+    public ResponseEntity<Page<Customer>> pageCustomer(@PageableDefault(value = 2) Pageable pageable) {
         Page<Customer> customers = this.customerService.findAll(pageable);
         return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Customer>> listCustomer(@PageableDefault(value = 100) Pageable pageable) {
+        List<Customer> list = this.customerService.findAll(pageable).toList();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

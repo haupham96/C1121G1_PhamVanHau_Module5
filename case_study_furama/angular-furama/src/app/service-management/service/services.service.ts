@@ -2,11 +2,15 @@ import {Injectable} from '@angular/core';
 import {Service} from '../model/service';
 import {RentType} from '../model/rent-type';
 import {ServiceType} from '../model/service-type';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
+
+  url = 'http://localhost:8080/service';
 
   rentTypes: RentType[] = [
     {id: 1, name: 'year'},
@@ -69,31 +73,30 @@ export class ServicesService {
     },
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  save(service: Service) {
-    this.services.push(service);
+  getAllServices(page: number): Observable<any> {
+    return this.http.get<any>(`${this.url}?page=${page}`);
   }
 
-  findById(id: number): Service {
-    return this.services.find(item => item.id === id);
+  getServicesList(): Observable<any> {
+    return this.http.get<any>(`${this.url}/list`);
   }
 
-  deleteById(idDelete: number) {
-    for (let i = 0; i < this.services.length; i++) {
-      if (this.services[i].id === idDelete) {
-        this.services.splice(i, 1);
-        break;
-      }
-    }
+  save(service: Service): Observable<Service> {
+    return this.http.post(`${this.url} / create`, service);
   }
 
-  edit(service: Service) {
-    for (let i = 0; i < this.services.length; i++) {
-      if (this.services[i].id === service.id) {
-        this.services[i] = service;
-      }
-    }
+  findById(id: number): Observable<Service> {
+    return this.http.get(`${this.url} /${id}`);
+  }
+
+  deleteById(idDelete: number): Observable<Service> {
+    return this.http.delete(`${this.url} / delete /${idDelete}`);
+  }
+
+  edit(service: Service): Observable<Service> {
+    return this.http.put(`${this.url} / edit /${service.id}`, service);
   }
 }

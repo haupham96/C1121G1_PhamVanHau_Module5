@@ -34,7 +34,7 @@ public class Service {
     private ServiceType serviceType;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service",cascade = CascadeType.REMOVE)
     private Set<Contract> contracts;
 
     public Service() {

@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-6 mx-auto">
+      <h3 class="alert alert-danger" *ngIf="message!=''">{{message}}</h3>
       <form [formGroup]="customerForm" (ngSubmit)="createCustomer()">
         <div class="modal-header">
           <h4 class="text-primary">Create new Customer</h4>
@@ -10,8 +11,8 @@
             <label>Customer Code</label>
             <input type="text" class="form-control" formControlName="customerCode">
             <div *ngIf="!customerCode.valid && (customerCode.touched || customerCode.dirty)">
-                <p class="alert alert-danger" *ngIf="customerCode.errors?.pattern">Must be KH-XXXX</p>
-                <p class="alert alert-danger" *ngIf="customerCode.errors?.required">Required</p>
+              <p class="alert alert-danger" *ngIf="customerCode.errors?.pattern">Must be KH-XXXX</p>
+              <p class="alert alert-danger" *ngIf="customerCode.errors?.required">Required</p>
             </div>
           </div>
           <div class="form-group">
@@ -49,7 +50,8 @@
             <label>Phone number</label>
             <input type="text" class="form-control" formControlName="phone">
             <div *ngIf="!phone.valid && (phone.touched || phone.dirty)">
-              <p class="alert alert-danger" *ngIf="phone.errors?.pattern">Must be 090xxxxxxx or 091xxxxxxx or (84)+90xxxxxxx or (84)+91xxxxxxx.</p>
+              <p class="alert alert-danger" *ngIf="phone.errors?.pattern">Must be 090xxxxxxx or 091xxxxxxx or
+                (84)+90xxxxxxx or (84)+91xxxxxxx.</p>
               <p class="alert alert-danger" *ngIf="phone.errors?.required">Required</p>
             </div>
           </div>
@@ -65,7 +67,8 @@
             <label>Address</label>
             <input type="text" class="form-control" formControlName="address">
             <div *ngIf="!address.valid && (address.touched || address.dirty)">
-              <p class="alert alert-danger" *ngIf="address.errors?.pattern">Must be 090xxxxxxx or 091xxxxxxx or (84)+90xxxxxxx or (84)+91xxxxxxx.</p>
+              <p class="alert alert-danger" *ngIf="address.errors?.pattern">Must be 090xxxxxxx or 091xxxxxxx or
+                (84)+90xxxxxxx or (84)+91xxxxxxx.</p>
               <p class="alert alert-danger" *ngIf="address.errors?.required">Required</p>
             </div>
           </div>
@@ -79,7 +82,9 @@
         </div>
         <div class="modal-footer">
           <a [routerLink]="['/customer-list']" mdbBtn mdbWavesEffect rounded="true" gradient="purple" type="button">Cancel</a>
-          <button rounded="true" mdbBtn mdbWavesEffect gradient="blue" [disabled]="!customerForm.valid" type="submit">Create</button>
+          <button rounded="true" mdbBtn mdbWavesEffect gradient="blue" [disabled]="!customerForm.valid" type="submit">
+            Create
+          </button>
         </div>
       </form>
     </div>

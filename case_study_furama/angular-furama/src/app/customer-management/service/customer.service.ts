@@ -65,34 +65,24 @@ export class CustomerService {
     return this.http.get<any>(`${this.url}/customer?page=${page}`);
   }
 
-  deleteById(idDelete: number) {
-    for (let i = 0; i < this.customers.length; i++) {
-      if (this.customers[i].id === idDelete) {
-        this.customers.splice(i, 1);
-      }
-    }
+  getCustomerList(): Observable<any> {
+    return this.http.get<any>(`${this.url}/customer/list`);
   }
 
-  save(customer: Customer) {
-    this.customers.push(customer);
+  deleteById(idDelete: number): Observable<Customer> {
+    return this.http.delete(`${this.url}/customer/delete/${idDelete}`);
   }
 
-  findById(id: number): Customer {
-    for (const c of this.customers) {
-      if (c.id === id) {
-        return c;
-      }
-    }
-    return null;
+  save(customer: Customer): Observable<Customer> {
+    return this.http.post(`${this.url}/customer/create`, customer);
   }
 
-  editCustomer(customer: Customer) {
-    for (let i = 0; i < this.customers.length; i++) {
-      if (this.customers[i].id === customer.id) {
-        this.customers[i] = customer;
-        break;
-      }
-    }
+  findById(id: number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.url}/customer/${id}`);
+  }
+
+  editCustomer(customer: Customer): Observable<Customer> {
+    return this.http.put(`${this.url}/customer/edit/${customer.id}`, customer);
   }
 
 }

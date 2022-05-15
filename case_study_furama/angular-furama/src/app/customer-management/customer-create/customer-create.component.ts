@@ -14,6 +14,8 @@ export class CustomerCreateComponent implements OnInit {
 
   customerTypes: CustomerType[] = [];
 
+  message = '';
+
   customerForm = new FormGroup({
     id: new FormControl(),
   });
@@ -79,7 +81,13 @@ export class CustomerCreateComponent implements OnInit {
 
   createCustomer() {
     const customer = Object.assign({}, this.customerForm.value);
-    this.customerService.save(customer);
-    this.router.navigate(['/customer-list']);
+    this.customerService.save(customer).subscribe(() => {
+        alert('Create Success !');
+        this.router.navigate(['/customer-list']);
+      },
+      error => {
+        alert('Failed to Create !');
+        console.log(error);
+      });
   }
 }

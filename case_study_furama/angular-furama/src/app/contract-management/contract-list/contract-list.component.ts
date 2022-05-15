@@ -10,10 +10,13 @@ import {ContractService} from '../service/contract.service';
 export class ContractListComponent implements OnInit {
 
   contracts: Contract[] = [];
+  page = 1 ;
 
   constructor(private contractService: ContractService) {
-
-    this.contracts = this.contractService.contracts;
+    this.contractService.getAllContract().subscribe(data => {
+      this.contracts = data;
+      console.log(this.contracts);
+    });
   }
 
   ngOnInit(): void {

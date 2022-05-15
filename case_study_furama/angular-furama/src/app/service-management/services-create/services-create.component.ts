@@ -19,7 +19,19 @@ export class ServicesCreateComponent implements OnInit {
   serviceTypes: ServiceType[] = [];
 
   serviceForm = new FormGroup({
-    id: new FormControl(),
+    id: new FormControl(''),
+    area: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    floor: new FormControl(''),
+    maxPeople: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+    name: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z]+[ ]?){1,250}$')]),
+    otherConvenience: new FormControl('', [Validators.required]),
+    poolArea: new FormControl(''),
+    price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*$)')]),
+    serviceCode: new FormControl('', [Validators.required]),
+    standardRoom: new FormControl('', [Validators.required]),
+    rentType: new FormControl('', [Validators.required]),
+    serviceType: new FormControl('', [Validators.required]),
+    image: new FormControl('https://mb.cision.com/Public/15396/2220317/9eb0167e13c2681d_org.jpg'),
   });
 
   constructor(private servicesService: ServicesService, private router: Router) {
@@ -97,10 +109,14 @@ export class ServicesCreateComponent implements OnInit {
 
   createService() {
     const service: Service = Object.assign({}, this.serviceForm.value);
-    console.log(service);
-    this.servicesService.save(service);
-    alert('Create Success!');
-    this.router.navigate(['/services-list']);
+    this.servicesService.save(service).subscribe(() => {
+        alert('Create Success!');
+        this.router.navigate(['/services-list']);
+      },
+      err => {
+        console.log(err);
+        alert('Failed to create !');
+      });
   }
 
   changeServiceType() {

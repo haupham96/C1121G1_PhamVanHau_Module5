@@ -12,8 +12,6 @@ import {ModalDirective} from 'angular-bootstrap-md';
 })
 export class CustomerListComponent implements OnInit {
 
-  message = '';
-
   idDelete = 0;
 
   number = 0;
@@ -42,7 +40,6 @@ export class CustomerListComponent implements OnInit {
         data => {
           this.customers = data.content;
           this.number = data.number;
-          this.totalPages = data.totalPages;
           console.log(data);
         }, err => console.log(err)
       );
@@ -66,14 +63,16 @@ export class CustomerListComponent implements OnInit {
   }
 
   deleteCustomer(basicModal: ModalDirective) {
-    this.customerService.deleteById(this.idDelete);
-    this.message = 'Delete Sucess !';
-    basicModal.hide();
-    setTimeout(() => {
-      this.message = '';
-    }, 2000);
-  }
+    this.customerService.deleteById(this.idDelete).subscribe(() => {
+        basicModal.hide();
+        alert('Delete Success!');
+      },
+      error => {
+        console.log(error);
+        alert('Failed to Delete');
+      });
 
+  }
 
   getIdDeleteAndName(id: number, name: string) {
     this.idDelete = id;

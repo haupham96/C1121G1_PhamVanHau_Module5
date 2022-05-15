@@ -4,7 +4,9 @@
   </div>
   <div>
     <div class="col-3" style="display: flex; justify-content: flex-start; flex-direction: column">
-      <button [routerLink]="['/contract-create']" color="cyan" rounded="true" mdbBtn mdbWavesEffect>Create New Contract</button>
+      <button [routerLink]="['/contract-create']" color="cyan" rounded="true" mdbBtn mdbWavesEffect>Create New
+        Contract
+      </button>
     </div>
   </div>
   <br>
@@ -21,7 +23,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let contract of contracts ; index as i">
+      <tr *ngFor="let contract of contracts |paginate : {
+      id:'paginate',currentPage:page,totalItems:contracts.length,itemsPerPage:1
+      }; index as i">
         <td>{{i + 1}}</td>
         <td>{{contract.startDate}}</td>
         <td>{{contract.endDate}}</td>
@@ -31,5 +35,8 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div class="row d-flex flex-center mt-2">
+    <pagination-controls id="paginate" (pageChange)="page = $event"></pagination-controls>
   </div>
 </div>

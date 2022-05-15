@@ -18,6 +18,15 @@ export class CustomerEditComponent implements OnInit {
 
   customerForm = new FormGroup({
     id: new FormControl(''),
+    customerCode: new FormControl('', [Validators.required, Validators.pattern('^(KH-)[0-9]{4}$')]),
+    name: new FormControl('', Validators.required),
+    birthday: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+    gender: new FormControl(0, Validators.required),
+    idCard: new FormControl('', [Validators.required, Validators.pattern('^\\d{9}|\\d{11}$')]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^((090)|(091)|(\\+8490)|(\\+8491))\\d{7}$')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    address: new FormControl('', Validators.required),
+    customerType: new FormControl(this.customerTypes[0], Validators.required),
   });
 
   get id() {
@@ -62,22 +71,28 @@ export class CustomerEditComponent implements OnInit {
 
   constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
-      // tslint:disable-next-line:radix
-      const id = parseInt(param.get('id'));
-      this.customer = this.customerService.findById(id);
-    });
-    this.customerTypes = this.customerService.customerTypes;
-    this.customerForm = new FormGroup({
-      id: new FormControl(this.customer.id),
-      customerCode: new FormControl(this.customer.customerCode, [Validators.required, Validators.pattern('^(KH-)[0-9]{4}$')]),
-      name: new FormControl(this.customer.name, Validators.required),
-      birthday: new FormControl(this.customer.birthday, [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
-      gender: new FormControl(this.customer.gender, Validators.required),
-      idCard: new FormControl(this.customer.idCard, [Validators.required, Validators.pattern('^\\d{9}|\\d{11}$')]),
-      phone: new FormControl(this.customer.phone, [Validators.required, Validators.pattern('^((090)|(091)|(\\+8490)|(\\+8491))\\d{7}$')]),
-      email: new FormControl(this.customer.email, [Validators.required, Validators.email]),
-      address: new FormControl(this.customer.address, Validators.required),
-      customerType: new FormControl(this.customer.customerType, Validators.required),
+      const id = +param.get('id');
+      this.customerService.findById(id).subscribe((data) => {
+          this.customer = data;
+          this.customerTypes = this.customerService.customerTypes;
+          this.customerForm = new FormGroup({
+            id: new FormControl(this.customer.id),
+            customerCode: new FormControl(this.customer.customerCode, [Validators.required, Validators.pattern('^(KH-)[0-9]{4}$')]),
+            name: new FormControl(this.customer.name, Validators.required),
+            birthday: new FormControl(this.customer.birthday, [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+            gender: new FormControl(this.customer.gender, Validators.required),
+            idCard: new FormControl(this.customer.idCard, [Validators.required, Validators.pattern('^\\d{9}|\\d{11}$')]),
+            // tslint:disable-next-line:max-line-length
+            phone: new FormControl(this.customer.phone, [Validators.required, Validators.pattern('^((090)|(091)|(\\+8490)|(\\+8491))\\d{7}$')]),
+            email: new FormControl(this.customer.email, [Validators.required, Validators.email]),
+            address: new FormControl(this.customer.address, Validators.required),
+            customerType: new FormControl(this.customer.customerType, Validators.required),
+          });
+          console.log(this.customerForm.get('customerCode').value);
+        },
+        error => {
+          console.log(error);
+        });
     });
   }
 
@@ -89,11 +104,15 @@ export class CustomerEditComponent implements OnInit {
   }
 
   editCustomer() {
-    const customer: Customer = Object.assign({}, this.customerForm.value);
-    this.customerService.editCustomer(customer);
-    alert('Edit Success!');
-    this.router.navigate(['/customer-list']);
-
+    const customer: Customer = this.customerForm.value;
+    this.customerService.editCustomer(customer).subscribe(() => {
+        alert('Edit Success!');
+        this.router.navigate(['/customer-list']);
+      },
+      error => {
+        alert('Failed to Edit !');
+        console.log(error);
+      });
   }
 
 }
