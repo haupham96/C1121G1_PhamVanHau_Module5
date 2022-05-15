@@ -85,18 +85,18 @@ export class ServicesService {
   }
 
   save(service: Service): Observable<Service> {
-    return this.http.post(`${this.url} / create`, service);
+    return this.http.post(`${this.url}/create`, service);
   }
 
   findById(id: number): Observable<Service> {
-    return this.http.get(`${this.url} /${id}`);
+    return this.http.get(`${this.url}/${id}`);
   }
 
   deleteById(idDelete: number): Observable<Service> {
-    return this.http.delete(`${this.url} / delete /${idDelete}`);
+    return this.http.delete(`${this.url}/delete/${idDelete}`);
   }
 
   edit(service: Service): Observable<Service> {
-    return this.http.put(`${this.url} / edit /${service.id}`, service);
+    return this.http.put(`${this.url}/edit/${service.id}`, service);
   }
 }

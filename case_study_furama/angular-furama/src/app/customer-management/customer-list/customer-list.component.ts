@@ -66,12 +66,12 @@ export class CustomerListComponent implements OnInit {
     this.customerService.deleteById(this.idDelete).subscribe(() => {
         basicModal.hide();
         alert('Delete Success!');
+        window.location.reload();
       },
       error => {
         console.log(error);
         alert('Failed to Delete');
       });
-
   }
 
   getIdDeleteAndName(id: number, name: string) {
