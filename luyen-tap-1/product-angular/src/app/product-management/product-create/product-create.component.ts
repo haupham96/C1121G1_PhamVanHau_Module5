@@ -49,10 +49,10 @@ export class ProductCreateComponent implements OnInit {
   }
 
   validateDateBefore() {
-    let date1 = new Date(this.startDate.value);
-    let date2 = new Date(this.endDate.value);
-    if (date1 >= date2) {
-      this.productForm.get('endDate').setErrors({dateBefore:true});
+    let date1 = new Date(this.productForm.get('startDate').value);
+    let date2 = new Date(this.productForm.get('endDate').value);
+    if (date1?.getTime() >= date2?.getTime()) {
+      this.productForm.get('endDate').setErrors({dateBefore: true});
     }
   }
 

@@ -32,7 +32,7 @@
 
           <div class="form-group">
             <label>Start Day</label>
-            <input (ngModelChange)="validateDateBefore()" type="date" class="form-control" formControlName="startDate">
+            <input (change)="validateDateBefore()" type="date" class="form-control" formControlName="startDate">
             <div *ngIf="!startDate.valid && (startDate.touched || startDate.dirty)">
               <p *ngIf="startDate.errors?.required" class="alert alert-danger">Required .</p>
               <p *ngIf="price.errors?.pattern" class="alert alert-danger">Invalid date > 0 .</p>
@@ -44,7 +44,7 @@
 
           <div class="form-group">
             <label>End Day</label>
-            <input (ngModelChange)="validateDateBefore()" type="date" class="form-control" formControlName="endDate">
+            <input (change)="validateDateBefore()" type="date" class="form-control" formControlName="endDate">
             <div *ngIf="!endDate.valid && (endDate.touched || endDate.dirty)">
               <p *ngIf="endDate.errors?.required" class="alert alert-danger">Required .</p>
               <p *ngIf="endDate.errors?.pattern" class="alert alert-danger">Invalid date > 0 .</p>
