@@ -17,7 +17,7 @@ export class ProductEditComponent implements OnInit {
   productForm = new FormGroup({
     id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
-    price: new FormControl('', [Validators.required, Validators.pattern('^([0]*[1-9][0-9]*)|[1-9][0-9]*')]),
+    price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
     startDate: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     endDate: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     category: new FormControl()
@@ -76,14 +76,16 @@ export class ProductEditComponent implements OnInit {
     return this.productForm.get('endDate');
   }
 
-  editProduct(basicModal: ModalDirective) {
-    let product: Product = Object.assign({}, this.productForm.value);
-    this.service.editProduct(product).subscribe(() => {
-      basicModal.show();
-    }, err => {
-      console.log(err);
-      this.router.navigate(['product']);
-    })
+  editProduct(basicModal: ModalDirective, errorModal: ModalDirective) {
+    if (this.productForm.valid) {
+      let product: Product = Object.assign({}, this.productForm.value);
+      this.service.editProduct(product).subscribe(() => {
+        basicModal.show();
+      }, err => {
+        console.log(err);
+        errorModal.show();
+      })
+    }
 
   }
 }

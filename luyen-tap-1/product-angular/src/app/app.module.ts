@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ButtonsModule, ModalModule, TableModule, WavesModule} from "angular-bootstrap-md";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
     ButtonsModule,
     WavesModule,
     HttpClientModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FormsModule
 
   ],
   providers: [],

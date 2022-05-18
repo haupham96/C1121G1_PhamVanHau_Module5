@@ -12,8 +12,8 @@ export class ProductServiceService {
   constructor(private http: HttpClient) {
   }
 
-  findAllProducts(): Observable<any> {
-    return this.http.get<any>(`${this.URL}/product`);
+  findAllProducts(name: string, startDate: string, endDate:string): Observable<any> {
+    return this.http.get<any>(`${this.URL}/product?name_like=${name}&startDate_like=${startDate}&endDate_like=${endDate}`);
   }
 
   findAllCategories(): Observable<any> {

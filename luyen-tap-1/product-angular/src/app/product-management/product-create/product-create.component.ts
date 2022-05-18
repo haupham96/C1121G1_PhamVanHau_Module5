@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductServiceService} from "../service/product-service.service";
 import {Router} from "@angular/router";
@@ -13,13 +13,15 @@ import {ModalDirective} from "angular-bootstrap-md";
 })
 export class ProductCreateComponent implements OnInit {
 
+  @Input('successModal') successModal: ModalDirective;
+
   message = '';
   categories: Category[] = [];
 
   productForm = new FormGroup({
     id: new FormControl(),
     name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]),
-    price: new FormControl('', [Validators.required, Validators.pattern('^([0]*[1-9][0-9]*)|[1-9][0-9]*')]),
+    price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
     startDate: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     endDate: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     category: new FormControl()
@@ -37,15 +39,20 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createProduct(basicModal: ModalDirective) {
-    let product: Product = Object.assign({}, this.productForm.value);
-    this.service.createProduct(product).subscribe(() => {
-        basicModal.show();
-      }, error => {
-        console.log(error);
-        this.router.navigate(['/product']);
-      }
-    )
+  createProduct(basicModal: ModalDirective, errorModal: ModalDirective) {
+
+    if (this.productForm.valid) {
+      let product: Product = Object.assign({}, this.productForm.value);
+      this.service.createProduct(product).subscribe(() => {
+          basicModal.show();
+        }, error => {
+          console.log(error);
+          errorModal.show();
+          this.router.navigate(['/product/create']);
+        }
+      )
+    }
+
   }
 
   validateDateBefore() {
