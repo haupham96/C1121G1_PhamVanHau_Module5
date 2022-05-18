@@ -1,0 +1,39 @@
+<h1 class="text-center blue-text">LIST PRODUCT</h1>
+<div class="container">
+  <div class="row">
+    <button [routerLink]="['/product/create']" class="mb-2" mdbBtn mdbWavesEffect color="cyan" rounded="true">Create New Product</button>
+    <table mdbTable hover="true" striped="true">
+      <thead class="black white-text">
+      <tr mdbTableRow>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Start Day</th>
+        <th>End Day</th>
+        <th>Category</th>
+        <th colspan="2">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr mdbTableRow *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price |currency:"VND"}}</td>
+        <td>{{product.startDate| date:"dd/MM/yyyy"}}</td>
+        <td>{{product.endDate | date:"dd/MM/yyyy"}}</td>
+        <td>{{product.category.name}}</td>
+        <td>
+          <button [routerLink]="['/product/edit',product.id]" mdbBtn mdbWavesEffect rounded="true" gradient="blue" >Edit</button>
+        </td>
+        <td>
+          <button mdbBtn mdbWavesEffect rounded="true" gradient="purple">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+
+  </div>
+</div>

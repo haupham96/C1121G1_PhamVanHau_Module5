@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'delete/:id',
-    component: CategoryDeleteComponent
+    component: CategoryDeleteComponent ,
   },
 ];
 

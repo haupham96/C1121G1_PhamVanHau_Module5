@@ -1,0 +1,51 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "name": "iPhone"
+    },
+    {
+      "id": 2,
+      "name": "Samsung"
+    },
+    {
+      "id": 3,
+      "name": "Nokia"
+    }
+  ],
+  "product": [
+    {
+      "id": 1,
+      "name": "iPhone",
+      "price": "1000",
+      "startDate": "2000-01-01",
+      "endDate": "2000-01-15",
+      "category": {
+        "id": 1,
+        "name": "iPhone"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Samsung2",
+      "price": "20000",
+      "startDate": "2022-05-18",
+      "endDate": "2022-05-19",
+      "category": {
+        "id": 2,
+        "name": "Samsung"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Samsung1",
+      "price": "123123",
+      "startDate": "2022-05-19",
+      "endDate": "2022-05-21",
+      "category": {
+        "id": 2,
+        "name": "Samsung"
+      }
+    }
+  ]
+}

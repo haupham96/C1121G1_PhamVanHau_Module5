@@ -34,7 +34,12 @@ export class ContractCreateComponent implements OnInit {
     this.customerService.getCustomerList().subscribe(data => {
       this.customers = data;
       this.servicesService.getServicesList().subscribe(dataSV => {
-        this.services = dataSV;
+        for(let i=0;i<dataSV.length;i++){
+          if(dataSV[i].serviceType.id !== 3){
+            this.services.push(dataSV[i]);
+          }
+        }
+        console.log(this.services);
         this.contractForm = new FormGroup({
           id: new FormControl(''),
           startDate: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
