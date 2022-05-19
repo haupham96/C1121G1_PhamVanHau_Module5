@@ -59,7 +59,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  pickToDelete(success: ModalDirective) {
+ async pickToDelete(success: ModalDirective) {
     let arr = document.querySelectorAll("input[type='checkbox']:checked");
     let str = '';
     for (let i = 0; i < arr.length; i++) {
@@ -69,13 +69,13 @@ export class ProductListComponent implements OnInit {
     let arrString = str.trim().split(',')
     for (let i = 0; i < arrString.length - 1; i++) {
       let num = +arrString[i];
-      this.service.deleteProduct(num).subscribe(() => {
+     await this.service.deleteProduct(num).subscribe(() => {
       }, error => {
         console.log(error);
       }, () => {
-        success.show();
-        this.loadAll();
       });
     }
+   success.show();
+   this.loadAll();
   }
 }

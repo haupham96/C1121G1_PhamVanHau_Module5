@@ -1,0 +1,78 @@
+{
+  "product": [
+    {
+      "code": "SP-0001",
+      "name": "iPhone",
+      "price": "123",
+      "startDate": "2022-05-20",
+      "endDate": "2022-05-21",
+      "category": {
+        "id": 1,
+        "name": "iPhone"
+      },
+      "id": 1
+    },
+    {
+      "code": "SP-0002",
+      "name": "iPhone",
+      "price": "123",
+      "startDate": "2022-05-20",
+      "endDate": "2022-05-22",
+      "category": {
+        "id": 1,
+        "name": "iPhone"
+      },
+      "id": 2
+    },
+    {
+      "code": "SP-0003",
+      "name": "Samsung1",
+      "price": "123",
+      "startDate": "2022-05-19",
+      "endDate": "2022-05-20",
+      "category": {
+        "id": 1,
+        "name": "iPhone"
+      },
+      "id": 3
+    },
+    {
+      "code": "SP-0004",
+      "name": "Samsung1",
+      "price": "124",
+      "startDate": "2022-05-19",
+      "endDate": "2022-05-21",
+      "category": {
+        "id": 1,
+        "name": "iPhone"
+      },
+      "id": 4
+    },
+    {
+      "code": "SP-0005",
+      "name": "Samsung1",
+      "price": "123",
+      "startDate": "2022-05-20",
+      "endDate": "2022-05-21",
+      "category": {
+        "id": 3,
+        "name": "Nokia"
+      },
+      "id": 5
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "iPhone"
+    },
+    {
+      "id": 2,
+      "name": "Samsung"
+    },
+    {
+      "id": 3,
+      "name": "Nokia"
+    }
+  ]
+}

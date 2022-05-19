@@ -13,5 +13,17 @@
       "name": "Nokia"
     }
   ],
-  "product": []
+  "product": [
+    {
+      "id": 1,
+      "name": "iPhone",
+      "price": "123",
+      "startDate": "2022-05-19",
+      "endDate": "2022-05-20",
+      "category": {
+        "id": 2,
+        "name": "Samsung"
+      }
+    }
+  ]
 }
