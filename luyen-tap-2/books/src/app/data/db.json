@@ -1,0 +1,19 @@
+{
+  "book": [
+    {
+      "id": 1,
+      "name": "Truyen Kieu",
+      "author": "Nguyen Du",
+      "description": "About Thuy Kieu",
+      "quantity": 4
+    }
+  ],
+  "student": [
+    {
+      "id": 1,
+      "name": "Hau1",
+      "className": "C1"
+    }
+  ],
+  "card": []
+}

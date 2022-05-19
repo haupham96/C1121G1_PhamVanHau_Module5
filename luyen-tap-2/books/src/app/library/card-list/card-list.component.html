@@ -1,0 +1,81 @@
+<h2 style="font-size: 40px" class="text-center"><mdb-badge primary="true">BORROW CARD</mdb-badge></h2>
+<div class="container">
+  <div class="row">
+    <table mdbTable hover="true" striped="true">
+      <thead class="black white-text">
+      <tr mdbTableRow>
+        <th>Borrow Code</th>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Student</th>
+        <th>Class</th>
+        <th>Borrow Date</th>
+        <th>Return Date</th>
+        <th>Return Book</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr mdbTableRow *ngFor="let card of cards">
+        <td>{{card.code}}</td>
+        <td>{{card.book.name}}</td>
+        <td>{{card.book.author}}</td>
+        <td>{{card.student.name}}</td>
+        <td>{{card.student.className}}</td>
+        <td>{{card.borrowDate}}</td>
+        <td>{{card.returnDate}}</td>
+        <td>
+          <button (click)="basicModal.show();sendBookInfo(card)" mdbBtn mdbWavesEffect color="cyan" rounded="true">
+            Return
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Return this Book ?</h4>
+      </div>
+      <div class="modal-body">
+        <p class="deep-orange-text">{{bookReturn.name}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="returnBook(basicModal,success)" mdbWavesEffect>OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--success modal template-->
+<div mdbModal #success="mdbModal" id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button (click)="success.hide()" type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Great!</h4>
+        <p>Return Successfully {{bookReturn.name}} !</p>
+        <button (click)="success.hide()" type="button" class="btn btn-danger" id="delete_btn">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

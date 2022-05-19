@@ -1,0 +1,51 @@
+<h2 class="text-center blue-text">Librarys</h2>
+<div class="container">
+  <div class="row">
+    <table mdbTable hover="true" striped="true">
+      <thead class="black white-text">
+      <tr mdbTableRow>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Borrow</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr mdbTableRow *ngFor="let book of books">
+        <td>{{book.name}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.description}}</td>
+        <td>{{book.quantity}}</td>
+        <td>
+          <button *ngIf="book.quantity>0" [routerLink]="['/card-create',book.id]" mdbBtn mdbWavesEffect color="cyan"
+                  rounded="true">Borrow
+          </button>
+          <button *ngIf="book.quantity<=0" (click)="errorModal.show()" mdbBtn mdbWavesEffect color="cyan"
+                  rounded="true">Borrow
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Error -->
+<div mdbModal #errorModal="mdbModal" id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Ooops!</h4>
+        <p>OUT OF BOOKS!</p>
+        <button class="btn btn-success" (click)="errorModal.hide()">Try Again Later</button>
+      </div>
+    </div>
+  </div>
+</div>

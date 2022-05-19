@@ -13,17 +13,5 @@
       "name": "Nokia"
     }
   ],
-  "product": [
-    {
-      "id": 3,
-      "name": "Samsung2",
-      "price": "123123",
-      "startDate": "2022-05-19",
-      "endDate": "2022-05-21",
-      "category": {
-        "id": 2,
-        "name": "Samsung"
-      }
-    }
-  ]
+  "product": []
 }

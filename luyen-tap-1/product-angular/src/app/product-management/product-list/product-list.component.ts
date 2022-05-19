@@ -3,6 +3,7 @@ import {ProductServiceService} from "../service/product-service.service";
 import {Product} from "../model/product";
 import {ModalDirective} from "angular-bootstrap-md";
 import {map} from "rxjs/operators";
+import {async} from "rxjs/internal/scheduler/async";
 
 @Component({
   selector: 'app-product-list',
@@ -46,9 +47,12 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  search(name: string, startDate: string, endDate: string) {
+  search(name: string, startDate: string, endDate: string, errorModal: ModalDirective) {
     this.service.findAllProducts(name, startDate, endDate).subscribe(data => {
       this.products = data;
+      if (this.products.length < 1) {
+        errorModal.show();
+      }
       console.log(data);
     }, err => {
       console.log(err);
@@ -59,12 +63,14 @@ export class ProductListComponent implements OnInit {
     let arr = document.querySelectorAll("input[type='checkbox']:checked");
     let str = '';
     for (let i = 0; i < arr.length; i++) {
+      // @ts-ignore
       str += arr[i].value + ',';
     }
     let arrString = str.trim().split(',')
     for (let i = 0; i < arrString.length - 1; i++) {
-      let num =+ arrString[i];
-      this.service.deleteProduct(num).subscribe(()=>{},error => {
+      let num = +arrString[i];
+      this.service.deleteProduct(num).subscribe(() => {
+      }, error => {
         console.log(error);
       }, () => {
         success.show();
