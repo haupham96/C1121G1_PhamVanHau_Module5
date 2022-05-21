@@ -1,0 +1,324 @@
+{
+  "BaiDang": [
+    {
+      "id": 1,
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Mua",
+      "tinhTrang": "Moi",
+      "diaChi": "166 Nguyen Xi",
+      "dienTich": "30",
+      "huong": "Dong",
+      "tuaDe": "Can ban gap",
+      "noiDung": "can ra di nhanh can nha nay",
+      "gia": "1000000000",
+      "ngayDang": "2022-01-01"
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123NX",
+      "dienTich": "123",
+      "huong": "Bac",
+      "tuaDe": "zb",
+      "noiDung": "123",
+      "gia": "120000000",
+      "ngayDang": "Fri May 20 2022 10:41:25 GMT+0700 (Giờ Đông Dương)",
+      "id": 2
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123NX",
+      "dienTich": "122",
+      "huong": "Bac",
+      "tuaDe": "abc",
+      "noiDung": "ac",
+      "gia": "120000000",
+      "ngayDang": "Fri May 20 2022 10:52:51 GMT+0700 (Giờ Đông Dương)",
+      "id": 3
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "166 Nguyen Xi",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "abc",
+      "noiDung": "abc",
+      "gia": "120000000",
+      "ngayDang": "Fri May 20 2022 11:00:25 GMT+0700 (Giờ Đông Dương)",
+      "id": 4
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "166 Nguyen Xi",
+      "dienTich": "121",
+      "huong": "Dong",
+      "tuaDe": "abc",
+      "noiDung": "abc",
+      "gia": "120000000",
+      "ngayDang": "Fri May 20 2022 11:00:25 GMT+0700 (Giờ Đông Dương)",
+      "id": 5
+    },
+    {
+      "vungMien": "Da Nang",
+      "danhMuc": {
+        "id": 3,
+        "ten": "Dat Nen"
+      },
+      "banLa": "Cong Ty",
+      "banDangTin": "Cho Thue",
+      "tinhTrang": "Da Su Dung",
+      "diaChi": "166 Nuyen Xi",
+      "dienTich": "21",
+      "huong": "Tay",
+      "tuaDe": "abc",
+      "noiDung": "xyz",
+      "gia": "100000001",
+      "ngayDang": "Fri May 20 2022 11:03:09 GMT+0700 (Giờ Đông Dương)",
+      "id": 6
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "abc",
+      "noiDung": "xyz",
+      "gia": "120000001",
+      "ngayDang": "Sat May 21 2022 14:09:24 GMT+0700 (Giờ Đông Dương)",
+      "id": 7
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "acb",
+      "noiDung": "xzy",
+      "gia": "110000000",
+      "ngayDang": "Sat May 21 2022 14:10:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 8
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "acb",
+      "noiDung": "xzy",
+      "gia": "110000000",
+      "ngayDang": "Sat May 21 2022 14:10:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 9
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "12NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "ac",
+      "noiDung": "ac",
+      "gia": "120000000",
+      "ngayDang": "Sat May 21 2022 14:11:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 10
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "12NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "ac",
+      "noiDung": "ac",
+      "gia": "120000000",
+      "ngayDang": "Sat May 21 2022 14:11:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 11
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "12NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "ac",
+      "noiDung": "ac",
+      "gia": "120000000",
+      "ngayDang": "Sat May 21 2022 14:11:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 12
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "12NX",
+      "dienTich": "21",
+      "huong": "Bac",
+      "tuaDe": "ac",
+      "noiDung": "ac",
+      "gia": "120000000",
+      "ngayDang": "Sat May 21 2022 14:11:32 GMT+0700 (Giờ Đông Dương)",
+      "id": 13
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123",
+      "dienTich": "123",
+      "huong": "Bac",
+      "tuaDe": "123",
+      "noiDung": "123",
+      "gia": "123123123123",
+      "ngayDang": "Sat May 21 2022 14:12:03 GMT+0700 (Giờ Đông Dương)",
+      "id": 14
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123",
+      "dienTich": "123",
+      "huong": "Bac",
+      "tuaDe": "123",
+      "noiDung": "123",
+      "gia": "123123123123",
+      "ngayDang": "Sat May 21 2022 14:12:03 GMT+0700 (Giờ Đông Dương)",
+      "id": 15
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123",
+      "dienTich": "123",
+      "huong": "Bac",
+      "tuaDe": "123",
+      "noiDung": "123",
+      "gia": "123000000",
+      "ngayDang": "Sat May 21 2022 14:12:46 GMT+0700 (Giờ Đông Dương)",
+      "id": 16
+    },
+    {
+      "vungMien": "Ha Noi",
+      "danhMuc": {
+        "id": 1,
+        "ten": "Nha Dat"
+      },
+      "banLa": "Ca Nhan",
+      "banDangTin": "Can Ban",
+      "tinhTrang": "Moi",
+      "diaChi": "123",
+      "dienTich": "123",
+      "huong": "Bac",
+      "tuaDe": "123",
+      "noiDung": "123",
+      "gia": "123000000",
+      "ngayDang": "Sat May 21 2022 14:14:27 GMT+0700 (Giờ Đông Dương)",
+      "id": 17
+    }
+  ],
+  "DanhMuc": [
+    {
+      "id": 1,
+      "ten": "Nha Dat"
+    },
+    {
+      "id": 2,
+      "ten": "Nha Cho Thue"
+    },
+    {
+      "id": 3,
+      "ten": "Dat Nen"
+    }
+  ]
+}

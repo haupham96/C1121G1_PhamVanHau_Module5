@@ -1,0 +1,282 @@
+<div style="background-color: rgba(255,255,255,0.76); width: 100vw; height: 100vh">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <form [formGroup]="baiDangForm">
+
+          <h4 style="text-align: center" class="cyan-text pt-5">CREATE PRODUCT</h4>
+
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label><strong>Danh Mục</strong></label>
+              <select class="browser-default custom-select" aria-label="Default select example"
+                      formControlName="danhMuc">
+                <option *ngFor="let danhMuc of danhMucs" [ngValue]="danhMuc">{{danhMuc.ten}}</option>
+              </select>
+              <br>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Vùng Miền</strong></label>
+              <select class="browser-default custom-select" aria-label="Default select example"
+                      formControlName="vungMien">
+                <option value="Ha Noi">Hà Nội</option>
+                <option value="Da Nang">Đà Nẵng</option>
+                <option value="Sai Gon">Sài Gòn</option>
+              </select>
+              <br>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Bạn Là : </strong></label>
+              <div clas="">
+                <span>Cá Nhân : </span> <input type="radio" formControlName="banLa" value="Ca Nhan">
+              </div>
+              <div>
+                <span>Công ty : </span> <input type="radio" formControlName="banLa" value="Cong Ty">
+              </div>
+
+
+            </div>
+
+            <div class="form-group">
+              <label><strong>Bạn Đăng Tin:</strong></label>
+              <div>
+                <span>Cần Bán : </span> <input type="radio" formControlName="banDangTin" value="Can Ban">
+              </div>
+              <div>
+                <span>Cần Mua : </span> <input type="radio" formControlName="banDangTin" value="Can Mua">
+              </div>
+              <div>
+                <span>Cho Thuê : </span> <input type="radio" formControlName="banDangTin" value="Cho Thue">
+              </div>
+              <div>
+                <span>Cần Thuê: </span> <input type="radio" formControlName="banDangTin" value="Can Thue">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Tình Trạng</strong></label>
+              <div>
+                <span>Mới : </span> <input type="radio" formControlName="tinhTrang" value="Moi">
+              </div>
+              <div>
+                <span>Đã Sử Dụng : </span> <input type="radio" formControlName="tinhTrang" value="Da Su Dung">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Địa Chỉ:</strong></label>
+              <input type="text" class="form-control" formControlName="diaChi">
+              <div *ngIf="!diaChi.valid && (diaChi.touched || diaChi.dirty)">
+                <p *ngIf="diaChi.errors?.required" class="alert alert-danger">Bắt buộc .</p>
+              </div>
+              <div *ngIf="diaChi.valid">
+                <p class="alert alert-success">Hợp lệ !</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Diện Tích:</strong></label>
+              <input (change)="checkDienTich()" type="text" class="form-control" formControlName="dienTich">
+              <div *ngIf="!dienTich.valid && (dienTich.touched || dienTich.dirty)">
+                <p *ngIf="dienTich.errors?.required" class="alert alert-danger">Bắt buộc .</p>
+                <p *ngIf="dienTich.errors?.pattern" class="alert alert-danger">Phải là số thực .</p>
+                <p *ngIf="dienTich.errors?.min20" class="alert alert-danger">Phải lớn hơn 20 .</p>
+              </div>
+              <div *ngIf="dienTich.valid">
+                <p class="alert alert-success">Hợp lệ !</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Hướng</strong></label>
+              <select class="browser-default custom-select" aria-label="Default select example"
+                      formControlName="huong">
+                <option value="Bac">Bắc</option>
+                <option value="Nam">nam</option>
+                <option value="Tay">Tây</option>
+                <option value="Dong">Đông</option>
+              </select>
+              <br>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Tiêu Đề</strong></label>
+              <input type="text" class="form-control" formControlName="tuaDe">
+              <div *ngIf="!tuaDe.valid && (tuaDe.touched || tuaDe.dirty)">
+                <p *ngIf="tuaDe.errors?.required" class="alert alert-danger">Bắt buộc .</p>
+              </div>
+              <div *ngIf="tuaDe.valid">
+                <p class="alert alert-success">Hợp lệ !</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Nội Dung</strong></label>
+              <textarea class="form-control" formControlName="noiDung" cols="10"> </textarea>
+              <div *ngIf="!noiDung.valid && (noiDung.touched || noiDung.dirty)">
+                <p *ngIf="noiDung.errors?.required" class="alert alert-danger">Bắt buộc .</p>
+                <p *ngIf="noiDung.errors?.maxlength" class="alert alert-danger">không vượt quá 250 kí tự .</p>
+              </div>
+              <div *ngIf="noiDung.valid">
+                <p class="alert alert-success">Hợp lệ !</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label><strong>Giá</strong></label>
+              <input (change)="checkGia()" type="text" class="form-control" formControlName="gia">
+              <div *ngIf="!gia.valid && (gia.touched || gia.dirty)">
+                <p *ngIf="gia.errors?.required" class="alert alert-danger">Bắt buộc .</p>
+                <p *ngIf="gia.errors?.pattern" class="alert alert-danger">Phải là số .</p>
+                <p *ngIf="gia.errors?.giaMin" class="alert alert-danger">Phải lớn hơn 100 triệu .</p>
+              </div>
+              <div *ngIf="gia.valid">
+                <p class="alert alert-success">Hợp lệ !</p>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <a [routerLink]="['/']" mdbBtn mdbWavesEffect rounded="true" gradient="purple" type="button">Huỷ</a>
+              <button (click)="detailModal.show();thongTinBaiDang()" rounded="true" mdbBtn mdbWavesEffect gradient="blue"
+                      [disabled]="!baiDangForm.valid"
+                      type="submit">
+                Tạo Mới
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Detail Modal-->
+<div mdbModal #detailModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="detailModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100">Thông tin bài đăng của bạn !</h4>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <td>Vùng miền</td>
+            <td>{{baiDang.vungMien}}</td>
+          </tr>
+
+          <tr>
+            <td>Danh mục</td>
+            <td>{{baiDang.danhMuc?.ten}}</td>
+          </tr>
+
+          <tr>
+            <td>Bạn là :</td>
+            <td>{{baiDang.banLa}}</td>
+          </tr>
+
+          <tr>
+            <td>Bạn Đăng tin :</td>
+            <td>{{baiDang.banDangTin}}</td>
+          </tr>
+
+          <tr>
+            <td>Tình Trạng :</td>
+            <td>{{baiDang.tinhTrang}}</td>
+          </tr>
+
+          <tr>
+            <td>Địa Chỉ :</td>
+            <td>{{baiDang.diaChi}}</td>
+          </tr>
+
+          <tr>
+            <td>Diện Tích :</td>
+            <td>{{baiDang.dienTich}}</td>
+          </tr>
+
+          <tr>
+            <td>Hướng :</td>
+            <td>{{baiDang.huong}}</td>
+          </tr>
+
+          <tr>
+            <td>Tựa đề :</td>
+            <td>{{baiDang.tuaDe}}</td>
+          </tr>
+
+          <tr>
+            <td>Nội dung :</td>
+            <td>{{baiDang.noiDung}}</td>
+          </tr>
+
+          <tr>
+            <td>Giá :</td>
+            <td>{{baiDang.gia}}</td>
+          </tr>
+
+          <tr>
+            <td>Ngày đăng :</td>
+            <td>{{baiDang.ngayDang|date:"dd/MM/yyyy"}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="detailModal.hide()" mdbWavesEffect>Huỷ
+        </button>
+        <button (click)="themBaiDang(successModal,errorModal)" type="button" mdbBtn color="primary" class="relative waves-light"
+                mdbWavesEffect>Đăng
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--success modal template-->
+<div mdbModal #successModal="mdbModal" id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button (click)="successModal.hide()" type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>THÊM MỚI THÀNH CÔNG !</p>
+        <button (click)="successModal.hide()" type="button" class="btn btn-danger" id="delete_btn"
+                data-mdb-dismiss="modal" [routerLink]="['/']">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Error -->
+<div mdbModal #errorModal="mdbModal" id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Ooops!</h4>
+        <p>THẤT BẠI!</p>
+        <button class="btn btn-success" (click)="errorModal.hide()">Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>

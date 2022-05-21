@@ -1,0 +1,154 @@
+<h2 style="font-size: 50px" class="text-center">
+  <mdb-badge info="true">DANH SÁCH CÁC BÀI ĐĂNG</mdb-badge>
+</h2>
+<br>
+
+<div class="container">
+  <div class="row d-flex justify-content-start align-items-bottom mb-2">
+    <div class="col-2">
+      <label>Diện tích:</label>
+      <input #dienTichs [ngModel]="dienTich" class="form-control " type="text">
+    </div>
+    <div class="col-2">
+      <label>Giá </label>
+      <input #gias [ngModel]="gia" class="form-control " type="text">
+    </div>
+    <div class="col-2">
+      <label>Hướng</label>
+      <input #huongs [ngModel]="huong" class="form-control " type="text">
+    </div>
+    <button class="col-2" mdbBtn mdbWavesEffect rounded="true" gradient="purple"
+            (click)="search(dienTichs.value,gias.value,huongs.value,errorModal)">Tìm Kiếm
+    </button>
+  </div>
+  <div class="row">
+    <button [routerLink]="['/create-baiDang']" class="mb-2" mdbBtn mdbWavesEffect color="cyan" rounded="true"> Thêm bài
+      đăng
+    </button>
+    <table mdbTable hover="true" striped="true">
+      <thead class="black white-text">
+      <tr mdbTableRow>
+        <th>Tiêu đề</th>
+        <th>Loại bài viết</th>
+        <th>Danh Mục</th>
+        <th>Ngày Đăng</th>
+        <th>Trạng Thái</th>
+        <th>Diện Tích</th>
+        <th>Hướng</th>
+        <th>Giá</th>
+        <th colspan="2" class="text-center">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr mdbTableRow *ngFor="let baiDang of baiDangs">
+        <td>{{baiDang.tuaDe}}</td>
+        <td>{{baiDang.banDangTin}}</td>
+        <td>{{baiDang.danhMuc.ten}}</td>
+        <td>{{baiDang.ngayDang|date:"dd/MM/yyyy"}}</td>
+        <td>{{baiDang.tinhTrang}}</td>
+        <td>{{baiDang.dienTich}}</td>
+        <td>{{baiDang.huong}}</td>
+        <td>{{baiDang.gia|currency:"VND"}}</td>
+        <td>
+          <a class="text-primary" style="font-size: 20px">
+            <mdb-icon fas icon="pencil-alt"></mdb-icon>
+          </a>
+        </td>
+        <td>
+          <a class="text-danger" style="font-size: 20px">
+            <mdb-icon fas icon="trash-alt"></mdb-icon>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-flex flex-center">
+  <nav class="mt-2" aria-label="...">
+    <ul class="pagination">
+      <li class="page-item">
+        <button [disabled]="page<=0" class="page-link" (click)="previous()">Previous</button>
+      </li>
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">{{page + 1}}</span>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{totalPages}}</a>
+      </li>
+      <li class="page-item">
+        <button [disabled]="page>=totalPages-1" class="page-link" (click)="next()">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!--delete Modal-->
+<div mdbModal #viewModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="viewModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Thông tin bài đăng của bạn :</h4>
+      </div>
+      <div class="modal-body">
+        <p class="deep-orange-text">...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="viewModal.hide()" mdbWavesEffect>Close
+        </button>
+        <button type="button" mdbBtn color="primary"
+                class="relative waves-light"
+                mdbWavesEffect>Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--success modal template-->
+<div mdbModal #success="mdbModal" id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button (click)="success.hide()" type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Great!</h4>
+        <p>Successfully !</p>
+        <button (click)="success.hide()" type="button" class="btn btn-danger" id="delete_btn"
+                data-mdb-dismiss="modal" [routerLink]="['/']">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Error -->
+<div mdbModal #errorModal="mdbModal" id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Ooops!</h4>
+        <p>KHÔNG TÌM THẤY!</p>
+        <button class="btn btn-success" (click)="errorModal.hide();reload()">Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>
