@@ -12,8 +12,8 @@ export class BaiDangService {
   constructor(private http: HttpClient) {
   }
 
-  getAllBaiDang(dienTich: string, gia: string, huong: string, page: number): Observable<any> {
-    return this.http.get<any>(`${this.URL}?page=${page}&dienTich=${dienTich}&gia=${gia}&huong=${huong}`);
+  getAllBaiDang(dienTich: string, gia: string, huong: string, page: number,sortSelect: string): Observable<any> {
+    return this.http.get<any>(`${this.URL}?page=${page}&dienTich=${dienTich}&gia=${gia}&huong=${huong}&sortSelect=${sortSelect}`);
   }
 
   findBaiDangById(id: number): Observable<BaiDang> {
@@ -22,6 +22,14 @@ export class BaiDangService {
 
   createBaiDang(baiDang: BaiDang): Observable<BaiDang> {
     return this.http.post<BaiDang>(`${this.URL}`, baiDang);
+  }
+
+  editBaiDang(baiDang: BaiDang): Observable<BaiDang> {
+    return this.http.put<BaiDang>(`${this.URL}/${baiDang.id}`, baiDang);
+  }
+
+  deleteBaiDang(baiDang: BaiDang): Observable<BaiDang> {
+    return this.http.delete<BaiDang>(`${this.URL}/${baiDang.id}`);
   }
 
 }

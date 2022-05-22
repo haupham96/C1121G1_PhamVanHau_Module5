@@ -25,6 +25,8 @@
     <button [routerLink]="['/create-baiDang']" class="mb-2" mdbBtn mdbWavesEffect color="cyan" rounded="true"> Thêm bài
       đăng
     </button>
+    <button (click)="sortByPrice('ASC')" mdbBtn mdbWavesEffect color="orange">Sắp xếp theo giá <mdb-icon fas icon="long-arrow-alt-up"></mdb-icon></button>
+    <button (click)="sortByPrice('DESC')" mdbBtn mdbWavesEffect color="pink">Sắp xếp theo giá <mdb-icon fas icon="long-arrow-alt-down"></mdb-icon></button>
     <table mdbTable hover="true" striped="true">
       <thead class="black white-text">
       <tr mdbTableRow>
@@ -50,12 +52,12 @@
         <td>{{baiDang.huong}}</td>
         <td>{{baiDang.gia|currency:"VND"}}</td>
         <td>
-          <a class="text-primary" style="font-size: 20px">
+          <a [routerLink]="['/edit-baiDang',baiDang.id]" class="text-primary" style="font-size: 20px">
             <mdb-icon fas icon="pencil-alt"></mdb-icon>
           </a>
         </td>
         <td>
-          <a class="text-danger" style="font-size: 20px">
+          <a (click)="deleteModal.show();sendBaiBangInfo(baiDang)" class="text-danger" style="font-size: 20px">
             <mdb-icon fas icon="trash-alt"></mdb-icon>
           </a>
         </td>
@@ -85,24 +87,25 @@
 </div>
 
 <!--delete Modal-->
-<div mdbModal #viewModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
      aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="viewModal.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Thông tin bài đăng của bạn :</h4>
+        <h4 class="modal-title w-100">Xoá bài đăng này ?</h4>
       </div>
       <div class="modal-body">
-        <p class="deep-orange-text">...</p>
+        <p class="deep-orange-text">{{baiDang.tuaDe}}</p>
+        <p>Giá : {{baiDang.gia|currency:"VND"}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                (click)="viewModal.hide()" mdbWavesEffect>Close
+                (click)="deleteModal.hide()" mdbWavesEffect>Close
         </button>
-        <button type="button" mdbBtn color="primary"
+        <button (click)="deleteBaiDang(deleteModal,success,errorModal)" type="button" mdbBtn color="primary"
                 class="relative waves-light"
                 mdbWavesEffect>Delete
         </button>
@@ -146,7 +149,7 @@
       </div>
       <div class="modal-body text-center">
         <h4>Ooops!</h4>
-        <p>KHÔNG TÌM THẤY!</p>
+        <p>{{message}}</p>
         <button class="btn btn-success" (click)="errorModal.hide();reload()">Try Again</button>
       </div>
     </div>

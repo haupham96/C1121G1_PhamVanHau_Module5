@@ -29,6 +29,8 @@ public class BaiDang {
 
     @Column(columnDefinition = "LONGTEXT")
     private String noiDung;
+
+    @Column(columnDefinition = "INT")
     private String gia;
     private String ngayDang;
 

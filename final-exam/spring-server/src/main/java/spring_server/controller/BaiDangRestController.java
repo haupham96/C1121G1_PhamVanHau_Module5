@@ -27,8 +27,15 @@ public class BaiDangRestController {
     public ResponseEntity<Page<BaiDang>> listBaiDang(@RequestParam(required = false, defaultValue = "") String dienTich,
                                                      @RequestParam(required = false, defaultValue = "") String gia,
                                                      @RequestParam(required = false, defaultValue = "") String huong,
+                                                     @RequestParam(required = false) String sortSelect,
                                                      Pageable pageable) {
-        Sort sort = Sort.by("gia").ascending().and(Sort.by("dienTich").ascending());
+        Sort sort = Sort.by("ngayDang").descending();
+        if (sortSelect.equals("DESC")) {
+            sort = Sort.by("gia").descending();
+        } else if (sortSelect.equals("ASC")) {
+            sort = Sort.by("gia").ascending();
+        }
+
         Page<BaiDang> baiDangs = this.baiDangService.searchByAll(dienTich, gia, huong, PageRequest.of(pageable.getPageNumber(), 5, sort));
         return new ResponseEntity<>(baiDangs, HttpStatus.OK);
     }
