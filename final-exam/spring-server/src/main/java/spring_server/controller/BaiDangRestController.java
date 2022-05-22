@@ -1,5 +1,6 @@
 package spring_server.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,12 +9,19 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import spring_server.dto.BaiDangDTO;
 import spring_server.model.BaiDang;
 import spring_server.model.DanhMuc;
 import spring_server.service.IBaiDangService;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -56,16 +64,46 @@ public class BaiDangRestController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<Void> createBaiDang(@RequestBody BaiDang baiDang) {
+    public ResponseEntity<Map<String, String>> createBaiDang(@Valid @RequestBody BaiDangDTO baiDangDTO, BindingResult bindingResult) {
+        Map<String, String> mapErrors = null;
+
+        baiDangDTO.validate(baiDangDTO, bindingResult);
+
+        if (bindingResult.hasFieldErrors()) {
+            mapErrors = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(e -> e.getField(), e -> e.getDefaultMessage()));
+            return new ResponseEntity<>(mapErrors, HttpStatus.BAD_REQUEST);
+        }
+        BaiDang baiDang = new BaiDang();
+        DanhMuc danhMuc = new DanhMuc();
+
+        BeanUtils.copyProperties(baiDangDTO.getDanhMuc(), danhMuc);
+        BeanUtils.copyProperties(baiDangDTO, baiDang);
+        baiDang.setDanhMuc(danhMuc);
+
         this.baiDangService.save(baiDang);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/list/{id}")
-    public ResponseEntity<Void> editBaiDang(@PathVariable Integer id, @RequestBody BaiDang baiDang) {
+    public ResponseEntity<Map<String, String>> editBaiDang(@PathVariable Integer id, @Valid @RequestBody BaiDangDTO baiDangDTO, BindingResult bindingResult) {
+        Map<String, String> mapErr = null;
+
         if (this.baiDangService.findById(id) == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        baiDangDTO.validate(baiDangDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
+            mapErr = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(e -> e.getField(), e -> e.getDefaultMessage()));
+            return new ResponseEntity<>(mapErr, HttpStatus.BAD_REQUEST);
+        }
+
+        BaiDang baiDang = new BaiDang();
+        DanhMuc danhMuc = new DanhMuc();
+
+        BeanUtils.copyProperties(baiDangDTO, baiDang);
+        BeanUtils.copyProperties(baiDangDTO.getDanhMuc(), danhMuc);
+
         this.baiDangService.save(baiDang);
         return new ResponseEntity<>(HttpStatus.OK);
     }
